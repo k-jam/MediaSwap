@@ -5,7 +5,10 @@ using System.Text;
 
 namespace MediaSwap.Core.Models
 {
-    class MediaType
+    public class MediaType
     {
+        public int MediaTypeId { get; set; }
+        public string MediaTypeName { get; set; }
+        public int PlatformTypeId { get; set; }
     }
 }

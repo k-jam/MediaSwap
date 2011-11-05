@@ -5,7 +5,9 @@ using System.Text;
 
 namespace MediaSwap.Core.Models
 {
-    class Platform
+    public class Platform
     {
+        public int PlatformTypeId { get; set; }
+        public string PlatformTypeName { get; set; }
     }
 }
