@@ -38,11 +38,17 @@ namespace MediaSwap.Core.Services
 
                 return item;
             }
+          
         }
 
         public IEnumerable<Models.Item> Search(string name)
         {
-            throw new NotImplementedException();
+            using (var context  = GetContext())
+            {
+                return context.Item.Where(i => i.ItemName.Contains(name)).OrderBy(i => i.ItemName);
+            }
+
+            //throw new NotImplementedException();
         }
     }
 }
