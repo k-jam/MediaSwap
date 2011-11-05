@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaSwap.Web", "MediaSwap.Web\MediaSwap.Web.csproj", "{4893983C-38D9-4338-833F-2ADCDD77029A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaSwap.Core", "MediaSwap.Core\MediaSwap.Core.csproj", "{3917ABAE-4841-4F88-A2B3-88CB9545A482}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{4893983C-38D9-4338-833F-2ADCDD77029A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4893983C-38D9-4338-833F-2ADCDD77029A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4893983C-38D9-4338-833F-2ADCDD77029A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3917ABAE-4841-4F88-A2B3-88CB9545A482}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3917ABAE-4841-4F88-A2B3-88CB9545A482}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3917ABAE-4841-4F88-A2B3-88CB9545A482}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3917ABAE-4841-4F88-A2B3-88CB9545A482}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
