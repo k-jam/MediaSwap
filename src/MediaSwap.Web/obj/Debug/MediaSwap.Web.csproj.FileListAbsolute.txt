@@ -1,7 +1,0 @@
-C:\_Dev\WebApps\mediaswap\src\MediaSwap.Web\bin\MediaSwap.Web.dll
-C:\_Dev\WebApps\mediaswap\src\MediaSwap.Web\bin\MediaSwap.Web.pdb
-C:\_Dev\WebApps\mediaswap\src\MediaSwap.Web\bin\EntityFramework.dll
-C:\_Dev\WebApps\mediaswap\src\MediaSwap.Web\bin\EntityFramework.xml
-C:\_Dev\WebApps\mediaswap\src\MediaSwap.Web\obj\Debug\ResolveAssemblyReference.cache
-C:\_Dev\WebApps\mediaswap\src\MediaSwap.Web\obj\Debug\MediaSwap.Web.dll
-C:\_Dev\WebApps\mediaswap\src\MediaSwap.Web\obj\Debug\MediaSwap.Web.pdb
