@@ -16,6 +16,15 @@ namespace MediaSwap.Core.Repositories
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+
+            modelBuilder.Entity<User>().HasOptional(u => u.Items)
+                               .WithMany()
+                               .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Item>().HasOptional(u => u.Users)
+                               .WithMany()
+                               .WillCascadeOnDelete(false);
+
             base.OnModelCreating(modelBuilder);
         }
     }
