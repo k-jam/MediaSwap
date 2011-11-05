@@ -1,28 +1,43 @@
-﻿@model IEnumerable<MediaSwap.Web.ViewModels.SearchItemViewModel>
+﻿@model MediaSwap.Web.ViewModels.SearchItemViewModel
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+@using (Html.BeginForm()){
+   
+<h2>
+    Index</h2>
+    @Html.Label("Enter Search") 
+    @Html.TextBox("search")
+    <input type="submit" value="Search" />
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<div class="span8">
 <table>
     <tr>
-        <th></th>
+        <th>
+        </th>
     </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
-
+    @if(@Model.ItemResults != null)
+    {
+        foreach (var item in Model.ItemResults)
+        {
+        <tr>
+            <td>
+                @Html.Label(item.ItemId.ToString()) 
+            </td>
+            <td>
+                @Html.Label(item.ItemName.ToString())
+            </td>
+            <td>
+                @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |*@
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) 
+                @*@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+            </td>
+        </tr>
+        }
+    }
 </table>
+</div>
+}
