@@ -1,5 +1,31 @@
-﻿@{
+﻿@model MediaSwap.Core.Models.User
+     
+@{
     ViewBag.Title = "Edit";
 }
+          
+@using (Html.BeginForm())
+{   
+    <div class="form-stacked">
+    @Html.HiddenFor(m => m.UserId)
+    @Html.LabelFor(m => m.UserName)
+    @Html.TextBoxFor(m => m.UserName)
+    @Html.ValidationMessageFor(m => m.UserName)
+    @Html.LabelFor(m => m.FirstName)
+    @Html.TextBoxFor(m => m.FirstName)
+    @Html.ValidationMessageFor(m => m.FirstName)
+    @Html.LabelFor(m => m.LastName)
+    @Html.TextBoxFor(m => m.LastName)
+    @Html.ValidationMessageFor(m => m.LastName)
+    @Html.LabelFor(m => m.Email)
+    @Html.TextBoxFor(m => m.Email)
+    @Html.ValidationMessageFor(m => m.Email)
+    @Html.LabelFor(m => m.GeoLocation)
+    @Html.TextBoxFor(m => m.GeoLocation)
+    @Html.ValidationMessageFor(m => m.GeoLocation)
+    <div class="actions">
+        <input type="submit" value ="Save Profile" id="btnEdit" class="btn primary" />
+    </div>
+</div>
 
-
+}

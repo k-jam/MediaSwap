@@ -16,9 +16,9 @@ namespace MediaSwap.Web.Controllers
         {
             IUserService = new UserService();
         }
-        public ActionResult Index()
+        public ActionResult Index(int id)
         {
-            return View();
+            return View(IUserService.GetUser(id));
         }
         [HttpGet]
         public ActionResult Create()
@@ -28,6 +28,22 @@ namespace MediaSwap.Web.Controllers
 
         [HttpPost]
         public ActionResult Create(User user)
+        {
+            if (ModelState.IsValid)
+            {
+                IUserService.SaveUser(user);
+            }
+            return View(user);
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            return View(IUserService.GetUser(id));
+        }
+
+        [HttpPost]
+        public ActionResult Edit(User user)
         {
             if (ModelState.IsValid)
             {
