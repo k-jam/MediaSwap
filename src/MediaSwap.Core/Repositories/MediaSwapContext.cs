@@ -13,23 +13,10 @@ namespace MediaSwap.Core.Repositories
         public DbSet<Item> Item { get; set; }
         public DbSet<MediaType> MediaType { get; set; }
         public DbSet<Platform> Platform { get; set; }
+        public DbSet<Queue> Queue { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<User>()
-            //                   .HasMany(u => u.Items)
-            //                   .WithMany()
-            //                   .Map(mc =>
-            //                    {
-            //                        mc.MapLeftKey("ItemId");
-            //                        mc.MapRightKey("UserId");
-            //                        mc.ToTable("UserItem");
-            //                    });
-
-            //modelBuilder.Entity<Item>().HasOptional(u => u.Users)
-            //                   .WithMany()
-            //                   .WillCascadeOnDelete(false);
-
             base.OnModelCreating(modelBuilder);
         }
     }
