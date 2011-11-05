@@ -9,5 +9,6 @@ namespace MediaSwap.Core.Models
     {
         public int PlatformTypeId { get; set; }
         public string PlatformTypeName { get; set; }
+
     }
 }

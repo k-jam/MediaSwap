@@ -9,5 +9,6 @@ namespace MediaSwap.Core.Models
     {
         public int UserId { get; set; }
         public int ItemId { get; set; }
+
     }
 }
