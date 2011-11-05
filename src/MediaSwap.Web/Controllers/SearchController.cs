@@ -15,8 +15,7 @@ namespace MediaSwap.Web.Controllers
 
         public ActionResult Index()
         {
-            SearchItemViewModel searchItemViewModel = new SearchItemViewModel();            
-            return View(searchItemViewModel);
+            return View();
         }
          
     }
