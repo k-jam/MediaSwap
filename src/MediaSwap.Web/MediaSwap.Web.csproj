@@ -92,8 +92,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\User\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
+  </ItemGroup>  <ItemGroup>
     <ProjectReference Include="..\MediaSwap.Core\MediaSwap.Core.csproj">
       <Project>{3917ABAE-4841-4F88-A2B3-88CB9545A482}</Project>
       <Name>MediaSwap.Core</Name>
@@ -101,6 +100,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Item\AddItem.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\User\Create.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\User\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MediaSwap.Core\MediaSwap.Core.csproj">
+      <Project>{3917ABAE-4841-4F88-A2B3-88CB9545A482}</Project>
+      <Name>MediaSwap.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
@@ -121,7 +132,8 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>2666</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/MediaSwap</IISUrl>
+          <IISUrl>
+          </IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
