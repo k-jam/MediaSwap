@@ -18,12 +18,32 @@ namespace MediaSwap.Core.Services
 
         public Models.User GetUser(string token)
         {
-            throw new NotImplementedException();
+            using (var context = GetContext())
+            {
+                return context.User.FirstOrDefault(u => u.Token == token);
+            }
         }
 
         public Models.User SaveUser(Models.User user)
         {
-            throw new NotImplementedException();
+
+            using (var context = GetContext())
+            {
+                var existingUser = GetUser(user.UserId);
+
+                if (existingUser == null)
+                {
+                    context.User.Add(user);
+                }
+                else
+                {
+                    context.User.Attach(user);
+                }
+
+                context.SaveChanges();
+
+                return user;
+            }
         }
     }
 }
