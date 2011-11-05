@@ -12,5 +12,7 @@ namespace MediaSwap.Core.Services
         Item SaveItem(Item item);
         IEnumerable<Item> Search(string name);
 
+        IEnumerable<Item> GetItems(int? mediaTypeId = null, bool onlyAvailable = false);
+
     }
 }

@@ -56,6 +56,29 @@ namespace MediaSwap.Core.Services
                 return items.ToList();
             }
         }
-        
+
+        public IEnumerable<Item> GetItems(int? mediaTypeId = null, bool onlyAvailable = false)
+        {
+            using (var context = GetContext())
+            {
+                IQueryable<Item> items;
+
+                items = from i in context.Item
+                        select i;
+
+                if (onlyAvailable)
+                {
+                    items = from i in items where !context.Queue.Any(q => q.ItemId == i.ItemId && q.ReturnDate != null)
+                            select i;
+                }
+
+                if (mediaTypeId.HasValue)
+                {
+                    items = items.Where(i => i.MediaId == mediaTypeId);
+                }
+
+                return items.ToList();
+            }
+        }
     }
 }
