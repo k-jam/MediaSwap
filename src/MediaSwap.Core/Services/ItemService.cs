@@ -42,10 +42,17 @@ namespace MediaSwap.Core.Services
 
         public IEnumerable<Models.Item> Search(string name)
         {
+            IEnumerable<Models.Item> items;
             using (var context = GetContext())
             {
-                var items = context.Item.Where(i => i.ItemName.ToUpper().Contains(name.ToUpper()));
-
+                if (name == "")
+                {
+                    items = context.Item;
+                }
+                else
+                {
+                    items = context.Item.Where(i => i.ItemName.ToUpper().Contains(name.ToUpper()));
+                }
                 return items.ToList();
             }
         }

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using PagedList;
 
 using MediaSwap.Web.ViewModels;
+using MediaSwap.Core.Services;
 
 namespace MediaSwap.Web.Controllers
 {
@@ -15,8 +16,19 @@ namespace MediaSwap.Web.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            SearchItemViewModel searchItemViewModel = new SearchItemViewModel();
+            //ItemService iss = new ItemService();
+            //searchItemViewModel.ItemResults = iss.Search(search.Value.ToString()).ToList();
+            return View(searchItemViewModel);
         }
-         
+
+        [HttpPost]
+        public ActionResult Index(string search)
+        {
+            SearchItemViewModel searchItemViewModel = new SearchItemViewModel();
+            ItemService iss = new ItemService();
+            searchItemViewModel.ItemResults = iss.Search(search).ToList();
+            return View(searchItemViewModel);
+        }
     }
 }
