@@ -65,9 +65,9 @@ namespace MediaSwap.Core.Services
         {
             using (var context = GetContext())
             {
-                var user = context.User.Where(e => e.UserId == userId);
+                var user = context.User.Where(e => e.UserId == userId).FirstOrDefault();
 
-                var items = context.Item.Where(e => e.Users == user);
+                var items = context.Item.Where(e => e.Users == user).ToList();
                 
                 return items;
             }
