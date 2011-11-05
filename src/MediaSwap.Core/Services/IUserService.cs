@@ -7,9 +7,9 @@ using MediaSwap.Core.Models;
 namespace MediaSwap.Core.Services
 {
     public interface IUserService
-    {   
-        User GetUser { get; set; }
-        User SaveUser { get; set; }
-        User ValidateUser(string token);
+    {
+        User GetUser(int userId);
+        User GetUser(string token);
+        User SaveUser(User user);
     }
 }
