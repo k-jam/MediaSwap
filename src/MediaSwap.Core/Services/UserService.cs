@@ -45,5 +45,13 @@ namespace MediaSwap.Core.Services
                 return user;
             }
         }
+
+        public bool UserExists(string username)
+        {
+            using (var context = GetContext())
+            {
+                return context.User.Count(u => u.UserName == username) > 0;
+            }
+        }
     }
 }

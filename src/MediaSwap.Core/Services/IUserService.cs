@@ -9,7 +9,8 @@ namespace MediaSwap.Core.Services
     public interface IUserService
     {
         User GetUser(int userId);
-        User GetUser(string token);        
+        User GetUser(string token);
+        bool UserExists(string username);
         User SaveUser(User user);
     }
 }

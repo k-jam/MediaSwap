@@ -25,7 +25,9 @@ namespace MediaSwap.Core.Models
  
         [Required]
         public string Email { get; set; }
-        
+
+        public string OpenIdUrl { get; set; }
+
         public string Gravatar { get; set; }
         
         [Required]
