@@ -42,7 +42,12 @@ namespace MediaSwap.Core.Services
 
         public IEnumerable<Models.Item> Search(string name)
         {
-            throw new NotImplementedException();
+            using (var context = GetContext())
+            {
+                var items = context.Item.Where(i => i.ItemName.ToUpper().Contains(name.ToUpper()));
+
+                return items.ToList();
+            }
         }
     }
 }
