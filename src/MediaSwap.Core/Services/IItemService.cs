@@ -10,6 +10,9 @@ namespace MediaSwap.Core.Services
     {
         Item GetItem(int itemId);
         Item SaveItem(Item item);
+        bool EditItem(Item item);
+        void DeleteItem(int itemId);
+        IEnumerable<Item> GetItems(int userId);
         IEnumerable<Item> Search(string name);
 
     }

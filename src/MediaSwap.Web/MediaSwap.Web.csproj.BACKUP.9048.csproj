@@ -131,6 +131,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
+    <Content Include="packages.config" />
+=======
     <Content Include="Views\Item\EditItem.cshtml" />
   </ItemGroup>
   <ItemGroup>

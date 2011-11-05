@@ -22,10 +22,15 @@ namespace MediaSwap.Web.Controllers
         }
 
         [HttpGet]
+        public ActionResult Items()
+        {
+            var items = _itemService.GetItems(1);
+            return View(items);
+        }
+
+        [HttpGet]
         public ActionResult AddItem()
         {
-
-
             return View();
         }
 
@@ -33,6 +38,34 @@ namespace MediaSwap.Web.Controllers
         public ActionResult AddItem(Item item)
         {
             _itemService.SaveItem(item);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult EditItem(int id)
+        {
+            var item = _itemService.GetItem(id);
+            return View(item);
+        }
+
+        [HttpPost]
+        public ActionResult EditItem(Item item)
+        {
+            _itemService.EditItem(item);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult DeleteItem(int id)
+        {
+            var item = _itemService.GetItem(id);
+            return View(item);
+        }
+
+        [HttpPost]
+        public ActionResult DeleteItem(Item item)
+        {
+            _itemService.DeleteItem(item.ItemId);
             return RedirectToAction("Index");
         }
     }
