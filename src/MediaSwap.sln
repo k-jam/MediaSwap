@@ -8,11 +8,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaSwap.EFIntegrationTests", "MediaSwap.EFIntegrationTests\MediaSwap.EFIntegrationTests.csproj", "{9BD15B04-D2B0-461E-AAD1-23BC2B562C98}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BB856F09-0F9B-4208-9857-05DD577116C7}"
-	ProjectSection(SolutionItems) = preProject
-		Local.testsettings = Local.testsettings
-		MediaSwap.vsmdi = MediaSwap.vsmdi
-		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution

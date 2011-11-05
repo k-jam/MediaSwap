@@ -1,0 +1,42 @@
+﻿@model MediaSwap.Core.Models.User
+@{
+    ViewBag.Title = "Create";
+}
+
+<form id="frmCreate" class="form-stacked" action="">
+
+    @Html.LabelFor(m=>m.UserName)
+    @Html.TextBoxFor(m=>m.UserName)
+    @Html.LabelFor(m=>m.FirstName)
+    @Html.TextBoxFor(m=>m.FirstName)
+    @Html.LabelFor(m=>m.LastName)
+    @Html.TextBoxFor(m=>m.LastName)
+    @Html.LabelFor(m => m.Email)
+    @Html.TextBoxFor(m=> m.Email)
+    @Html.LabelFor(m => m.GeoLocation)
+    @Html.TextBoxFor(m=>m.GeoLocation)
+
+    <div class="actions">
+        <input type="button" value ="Create Profile" id="btnCreate" class="btn primary" />
+    </div>
+</form>
+
+<script type="text/javascript">
+    $(function () {
+        $("#btnCreate").click(function () {
+
+            $.ajax({
+                type: 'POST',
+                url: "/User/Create",
+                data: $("#frmCreate").serialize(),
+                success: function (data) {
+                
+                
+                }
+            });
+        });
+    });
+
+
+
+</script>
