@@ -40,6 +40,39 @@ namespace MediaSwap.Core.Services
             }
         }
 
+        public bool EditItem(Models.Item item)
+        {
+            using (var context = GetContext())
+            {
+                context.Entry(item).State = System.Data.EntityState.Modified;
+
+                return context.SaveChanges() > 0;
+            }
+        }
+
+        public void DeleteItem(int itemId)
+        {
+            using (var context = GetContext())
+            {
+                var item = context.Item.Find(itemId);
+
+                context.Item.Remove(item);
+                context.SaveChanges() ;
+            }
+        }
+
+        public IEnumerable<Item> GetItems(int userId)
+        {
+            using (var context = GetContext())
+            {
+                var user = context.User.Where(e => e.UserId == userId).FirstOrDefault();
+
+                var items = context.Item.Where(e => e.Users == user).ToList();
+                
+                return items;
+            }
+        }
+
         public IEnumerable<Models.Item> Search(string name)
         {
             IEnumerable<Models.Item> items;

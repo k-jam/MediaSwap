@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
+using System.Data;
+using DataAnnotationsExtensions;
 namespace MediaSwap.Core.Models
 {
     public class User
@@ -24,6 +26,7 @@ namespace MediaSwap.Core.Models
         public string LastName { get; set; }
  
         [Required]
+        [Email]
         public string Email { get; set; }
 
         public string OpenIdUrl { get; set; }
