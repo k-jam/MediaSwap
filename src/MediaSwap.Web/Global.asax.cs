@@ -1,5 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
+using System.Data.Entity;
+using MediaSwap.Core.Repositories;
 
 namespace MediaSwap.Web
 {
@@ -19,7 +21,7 @@ namespace MediaSwap.Web
 
         protected void Application_Start()
         {
-            MvcHandler.DisableMvcResponseHeader = true;
+            MvcHandler.DisableMvcResponseHeader = true;            
 
             ViewEngines.Engines.Clear();
             ViewEngines.Engines.Add(new RazorViewEngine());
