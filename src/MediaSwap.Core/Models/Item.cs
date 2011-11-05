@@ -14,6 +14,6 @@ namespace MediaSwap.Core.Models
         public int AmazonId { get; set; }
         public int MediaId { get; set; }
 
-        public virtual IEnumerable<User> Users { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 }

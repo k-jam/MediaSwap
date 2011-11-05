@@ -16,14 +16,19 @@ namespace MediaSwap.Core.Repositories
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            //modelBuilder.Entity<User>()
+            //                   .HasMany(u => u.Items)
+            //                   .WithMany()
+            //                   .Map(mc =>
+            //                    {
+            //                        mc.MapLeftKey("ItemId");
+            //                        mc.MapRightKey("UserId");
+            //                        mc.ToTable("UserItem");
+            //                    });
 
-            modelBuilder.Entity<User>().HasOptional(u => u.Items)
-                               .WithMany()
-                               .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Item>().HasOptional(u => u.Users)
-                               .WithMany()
-                               .WillCascadeOnDelete(false);
+            //modelBuilder.Entity<Item>().HasOptional(u => u.Users)
+            //                   .WithMany()
+            //                   .WillCascadeOnDelete(false);
 
             base.OnModelCreating(modelBuilder);
         }

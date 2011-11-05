@@ -17,7 +17,8 @@ namespace MediaSwap.Core.Models
         public string Email { get; set; }
         public string Gravatar { get; set; }
         public string GeoLocation { get; set; }
-        public virtual IEnumerable<Item> Items { get; set; }
+
+        public ICollection<Item> Items { get; set; }
 
     }
 }
