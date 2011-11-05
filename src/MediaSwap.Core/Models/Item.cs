@@ -11,6 +11,5 @@ namespace MediaSwap.Core.Models
         public string ItemName { get; set; }
         public int AmazonId { get; set; }
         public int MediaId { get; set; }
-
     }
 }

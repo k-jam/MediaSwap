@@ -8,7 +8,7 @@ namespace MediaSwap.Core.Services
 {
     public interface IItemService
     {
-        IEnumerable<Item> GetItem(int itemId);
+        Item GetItem(int itemId);
         Item SaveItem(Item item);
         IEnumerable<Item> Search(string name);
 
