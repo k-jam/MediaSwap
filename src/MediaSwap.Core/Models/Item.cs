@@ -8,8 +8,12 @@ namespace MediaSwap.Core.Models
 {
     public class Item
     {
+<<<<<<< HEAD
         [Display(Name="Item Id")]
         [Required]
+=======
+        [Key]
+>>>>>>> working
         public int ItemId { get; set; }
 
         [Display(Name="Item Name")]
@@ -23,5 +27,7 @@ namespace MediaSwap.Core.Models
         [Display(Name="Media Id")]
         [Required]
         public int MediaId { get; set; }
+
+        public virtual IEnumerable<User> Users { get; set; }
     }
 }
