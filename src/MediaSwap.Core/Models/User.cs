@@ -13,5 +13,6 @@ namespace MediaSwap.Core.Models
         public string Email { get; set; }
         public string Gravatar { get; set; }
         public string GeoLocation { get; set; }
+
     }
 }
