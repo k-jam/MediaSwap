@@ -9,7 +9,6 @@ namespace MediaSwap.Core.Models
     {
         [Key]
         public int UserId { get; set; }
-
         public string Token { get; set; }
         
         [Required]
@@ -25,7 +24,6 @@ namespace MediaSwap.Core.Models
         public string LastName { get; set; }
  
         [Required]
-        
         public string Email { get; set; }
         
         public string Gravatar { get; set; }
@@ -33,6 +31,7 @@ namespace MediaSwap.Core.Models
         [Required]
         [Display(Name="Geo Loocation")]
         public string GeoLocation { get; set; }
-        public IEnumerable<Item> Items { get; set; }
+        public ICollection<Item> Items { get; set; }
+
     }
 }

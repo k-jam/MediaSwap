@@ -25,6 +25,6 @@ namespace MediaSwap.Core.Models
         [Required]
         public int MediaId { get; set; }
 
-        public virtual IEnumerable<User> Users { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 }
