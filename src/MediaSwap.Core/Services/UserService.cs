@@ -29,7 +29,7 @@ namespace MediaSwap.Core.Services
 
             using (var context = GetContext())
             {
-                var existingUser = GetUser(user.UserId);
+                var existingUser = context.User.FirstOrDefault(u => u.UserId == user.UserId);
 
                 if (existingUser == null)
                 {
@@ -37,7 +37,15 @@ namespace MediaSwap.Core.Services
                 }
                 else
                 {
-                    context.User.Attach(user);
+                    existingUser.UserName = user.UserName;
+                    existingUser.FirstName = user.FirstName;
+                    existingUser.LastName = user.LastName;
+                    existingUser.OpenIdUrl = user.OpenIdUrl;
+                    existingUser.Token = user.Token;
+                    existingUser.Gravatar = user.Gravatar;
+                    existingUser.GeoLocation = user.GeoLocation;
+                    existingUser.Email = user.Email;
+
                 }
 
                 context.SaveChanges();
