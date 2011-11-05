@@ -8,12 +8,9 @@ namespace MediaSwap.Core.Models
 {
     public class Item
     {
-<<<<<<< HEAD
         [Display(Name="Item Id")]
         [Required]
-=======
         [Key]
->>>>>>> working
         public int ItemId { get; set; }
 
         [Display(Name="Item Name")]

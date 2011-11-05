@@ -68,7 +68,9 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -92,7 +94,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\User\Index.cshtml" />
-  </ItemGroup>  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\MediaSwap.Core\MediaSwap.Core.csproj">
       <Project>{3917ABAE-4841-4F88-A2B3-88CB9545A482}</Project>
       <Name>MediaSwap.Core</Name>
