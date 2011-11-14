@@ -4,3 +4,4 @@ Chris Albrecht
 Michael Green
 Bradley Lower 
 Gary Bryant
+Paul Jeanquart
