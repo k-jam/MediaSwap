@@ -1,0 +1,50 @@
+﻿@model MediaSwap.Core.Models.Item
+
+@{
+    ViewBag.Title = "Edit Item";
+}
+
+<h2>EditItem</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm("EditItem", "Item", FormMethod.Post, new { @class = "form-stacked" })) {
+    @Html.ValidationSummary(true)
+    <div>
+        
+        @Html.HiddenFor(model => model.ItemId)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ItemName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ItemName)
+            @Html.ValidationMessageFor(model => model.ItemName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AmazonId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AmazonId)
+            @Html.ValidationMessageFor(model => model.AmazonId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.MediaId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.MediaId)
+            @Html.ValidationMessageFor(model => model.MediaId)
+        </div>
+
+        <div class="actions">
+            <input type="submit" class="btn primary" value="Save" />
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

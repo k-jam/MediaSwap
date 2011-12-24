@@ -115,6 +115,12 @@
     <Content Include="Views\User\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MediaSwap.Core\MediaSwap.Core.csproj">
+      <Project>{3917ABAE-4841-4F88-A2B3-88CB9545A482}</Project>
+      <Name>MediaSwap.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Item\AddItem.cshtml" />
   </ItemGroup>
@@ -131,13 +137,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Item\EditItem.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Item\DeleteItem.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Item\Items.cshtml" />
+    <Content Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
