@@ -51,5 +51,12 @@ namespace MediaSwap.Web.Controllers
             }
             return View(user);
         }
+ 
+        public string IsUserNameAvailable(string username)
+        {
+            var isAvailable = !IUserService.UserExists(username);
+            return (isAvailable).ToString();
+        }
+ 
     }
 }

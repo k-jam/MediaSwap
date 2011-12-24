@@ -5,6 +5,7 @@ using System.Text;
 using System.ComponentModel.DataAnnotations;
 using System.Data;
 using DataAnnotationsExtensions;
+using System.Web.Mvc;
 namespace MediaSwap.Core.Models
 {
     public class User
@@ -13,7 +14,8 @@ namespace MediaSwap.Core.Models
         public int UserId { get; set; }
         public string Token { get; set; }
         
-        [Required]
+       [Required]
+
         [Display(Name="User Name")]
         public string UserName { get; set; }
         
