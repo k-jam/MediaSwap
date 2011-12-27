@@ -85,7 +85,7 @@
                     <li><a href="@Url.Action("Index","Search")">Add to Queue</a></li>
                 </ul>
                 <ul class="nav secondary-nav">
-                    <li><strong>@(HttpContext.Current.User.Identity.IsAuthenticated ? Html.ActionLink("Logout", "SignOut", "User") : Html.ActionLink("Login", "Login", "User"))</strong></li>
+                    <li><strong>@(HttpContext.Current.User.Identity.IsAuthenticated ? Html.ActionLink("Logout", "Logout", "User") : Html.ActionLink("Login", "Login", "User"))</strong></li>
                 </ul>
             </div>
         </div>
