@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.ComponentModel.DataAnnotations;
+using System.Data;
 
 namespace MediaSwap.Core.Models
 {
@@ -13,11 +15,16 @@ namespace MediaSwap.Core.Models
 
     public class Queue
     {
+        [Key]
         public int QueueId { get; set; }
         public int ItemId { get; set; }
         public Item Item { get; set; }
-        public int UserId { get; set; }
-        public User User { get; set; }        
+        [ForeignKey("RequesterId")]
+        public User Requester { get; set; }
+        public int RequesterId { get; set; }
+        [Column("OwnerId")]
+        public User Owner { get; set; }
+        public int OwnerId { get; set; }
         public DateTime RequestDate { get; set; }
         public DateTime BorrowDate { get; set; }
         public DateTime ReturnDate { get; set; }

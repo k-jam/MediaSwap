@@ -13,7 +13,7 @@ namespace MediaSwap.Core.Services
         {
             using (var context = GetContext())
             {
-                var item = context.Item.Where(i => i.ItemId == itemId).FirstOrDefault();
+                var item = context.Item.Include("ItemType.Format").Where(i => i.ItemId == itemId).FirstOrDefault();
 
                 return item;                
             }   
@@ -24,7 +24,8 @@ namespace MediaSwap.Core.Services
             using (var context = GetContext())
             {
                 var existingItem = GetItem(item.ItemId);
-
+                
+                item.ItemType = context.ItemType.FirstOrDefault(it => it.ItemTypeId == item.ItemType.ItemTypeId);
                 if (existingItem == null)
                 {
                     context.Item.Add(item);
@@ -61,18 +62,6 @@ namespace MediaSwap.Core.Services
             }
         }
 
-        public IEnumerable<Item> GetItems(int userId)
-        {
-            using (var context = GetContext())
-            {
-                var user = context.User.Where(e => e.UserId == userId).FirstOrDefault();
-
-                var items = context.Item.Where(e => e.Users == user).ToList();
-                
-                return items;
-            }
-        }
-
         public IEnumerable<Models.Item> Search(string name)
         {
             IEnumerable<Models.Item> items;
@@ -80,23 +69,23 @@ namespace MediaSwap.Core.Services
             {
                 if (name == "")
                 {
-                    items = context.Item;
+                    items = context.Item.Include("ItemType.Format");
                 }
                 else
                 {
-                    items = context.Item.Where(i => i.ItemName.ToUpper().Contains(name.ToUpper()));
+                    items = context.Item.Include("ItemType.Format").Where(i => i.ItemName.ToUpper().Contains(name.ToUpper()));
                 }
                 return items.ToList();
             }
         }
 
-        public IEnumerable<Item> GetItems(int? mediaTypeId = null, bool onlyAvailable = false)
+        public IEnumerable<Item> GetItems(int? itemTypeId = null, bool onlyAvailable = false)
         {
             using (var context = GetContext())
             {
                 IQueryable<Item> items;
 
-                items = from i in context.Item
+                items = from i in context.Item.Include("ItemType.Format")
                         select i;
 
                 if (onlyAvailable)
@@ -105,10 +94,7 @@ namespace MediaSwap.Core.Services
                             select i;
                 }
 
-                if (mediaTypeId.HasValue)
-                {
-                    items = items.Where(i => i.MediaId == mediaTypeId);
-                }
+                
 
                 return items.ToList();
             }

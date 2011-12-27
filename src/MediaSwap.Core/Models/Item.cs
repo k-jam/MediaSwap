@@ -19,9 +19,7 @@ namespace MediaSwap.Core.Models
         [Required]
         public int AmazonId { get; set; }
 
-        [Display(Name="Media Id")]
-        [Required]
-        public int MediaId { get; set; }
+        public virtual ItemType ItemType { get; set; }
 
         public virtual ICollection<User> Users { get; set; }
     }

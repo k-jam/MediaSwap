@@ -11,8 +11,8 @@ namespace MediaSwap.Core.Repositories
     {
         public DbSet<User> User { get; set; }
         public DbSet<Item> Item { get; set; }
-        public DbSet<MediaType> MediaType { get; set; }
-        public DbSet<Platform> Platform { get; set; }
+        public DbSet<ItemType> ItemType { get; set; }
+        public DbSet<Format> Format { get; set; }
         public DbSet<Queue> Queue { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

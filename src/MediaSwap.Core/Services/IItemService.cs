@@ -12,7 +12,8 @@ namespace MediaSwap.Core.Services
         Item SaveItem(Item item);
         bool EditItem(Item item);
         void DeleteItem(int itemId);
-        IEnumerable<Item> GetItems(int userId);
+
+       
         IEnumerable<Item> Search(string name);
 
         IEnumerable<Item> GetItems(int? mediaTypeId = null, bool onlyAvailable = false);

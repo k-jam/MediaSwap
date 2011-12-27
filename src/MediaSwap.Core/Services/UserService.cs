@@ -12,7 +12,7 @@ namespace MediaSwap.Core.Services
         {
             using (var context = GetContext())
             {
-                return context.User.FirstOrDefault(u => u.UserId == userId);
+                return context.User.Include("Items").FirstOrDefault(u => u.UserId == userId);
             }
         }
 
@@ -53,7 +53,28 @@ namespace MediaSwap.Core.Services
                 return user;
             }
         }
+        public void AddItem(int userId, int itemId)
+        {
+            using (var context = GetContext())
+            {
+                var user = context.User.Include("Items").FirstOrDefault(i => i.UserId == userId);
+                
+                user.Items.Add(context.Item.FirstOrDefault(i=>i.ItemId == itemId));
+                context.SaveChanges();
+                //s.Items.Remove;
 
+            }
+        }
+
+        public void RemoveItem(int userId, int itemId)
+        {
+            using (var context = GetContext())
+            {
+                var user = context.User.Include("Items").FirstOrDefault(i => i.UserId == userId);
+                user.Items.Remove(context.Item.FirstOrDefault(i=>i.ItemId == itemId));
+                context.SaveChanges();
+            }
+        }
         public bool UserExists(string username)
         {
             using (var context = GetContext())

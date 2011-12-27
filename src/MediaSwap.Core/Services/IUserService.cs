@@ -11,6 +11,8 @@ namespace MediaSwap.Core.Services
         User GetUser(int userId);
         User GetUser(string token);
         bool UserExists(string username);
+        void AddItem(int userId, int itemId);
+        void RemoveItem(int userId, int itemId);
         User SaveUser(User user);
     }
 }
