@@ -1,12 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
-using MediaSwap.Core.Models;
-using MediaSwap.Core.Services;
+
 using DotNetOpenAuth.Messaging;
 using DotNetOpenAuth.OpenId;
-using DotNetOpenAuth.OpenId.RelyingParty;
 using DotNetOpenAuth.OpenId.Extensions.SimpleRegistration;
+using DotNetOpenAuth.OpenId.RelyingParty;
+
+using MediaSwap.Core.Models;
+using MediaSwap.Core.Services;
 
 namespace MediaSwap.Web.Controllers
 {
@@ -14,8 +18,7 @@ namespace MediaSwap.Web.Controllers
     {
         private static OpenIdRelyingParty _openId = new OpenIdRelyingParty();
         IUserService IUserService;
-        //
-        // GET: /User/
+
         public UserController()
         {
             IUserService = new UserService();
