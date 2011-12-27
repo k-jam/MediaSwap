@@ -7,17 +7,19 @@
 
 @using (Html.BeginForm()){
    
-<h2>
-    Index</h2>
+<div>
     @Html.Label("Enter Search") 
     @Html.TextBox("search")
     <input type="submit" value="Search" />
 
-<div class="span8">
+</div>
 <table>
     <tr>
         <th>
+          Name
         </th>
+        <th>Format</th>
+        <th></th>
     </tr>
     @if(@Model.ItemResults != null)
     {
@@ -25,19 +27,16 @@
         {
         <tr>
             <td>
-                @Html.Label(item.ItemId.ToString()) 
+                 @Html.Label(item.ItemName.ToString())
             </td>
             <td>
-                @Html.Label(item.ItemName.ToString())
+               @Html.Label(item.ItemType.Format.FormatTypeName)
             </td>
             <td>
-                @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |*@
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) 
-                @*@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+            <a href="">Add to Queue</a>
             </td>
         </tr>
         }
     }
 </table>
-</div>
 }

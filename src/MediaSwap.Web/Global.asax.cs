@@ -16,7 +16,7 @@ namespace MediaSwap.Web
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            routes.MapRoute("Default", "{controller}/{action}/{id}", new { controller = "Item", action = "Index", id = UrlParameter.Optional });
+            routes.MapRoute("Default", "{controller}/{action}/{id}", new { controller = "Search", action = "Index", id = UrlParameter.Optional });
         }
 
         protected void Application_Start()

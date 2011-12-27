@@ -5,7 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using MediaSwap.Core.Models;
 using MediaSwap.Core.Services;
-
+using MediaSwap.Web.ViewModels;
+using MediaSwap.Web.Models;
 namespace MediaSwap.Web.Controllers
 {
     public class ItemController : Controller
@@ -18,27 +19,38 @@ namespace MediaSwap.Web.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            var vm = new ItemMaintenanceViewModel() { };
+
+
+            var itemTypeService = new ItemTypeService();
+            
+           
+            vm.ItemTypes = itemTypeService.GetItemTypes();
+            vm.Items = _itemService.GetItems().Select(item => new ViewModels.DisplayItemViewModel() { ItemId = item.ItemId, Name = item.ItemName, Type = item.ItemType });
+
+           
+            return View("Items",vm);
         }
+        
 
         [HttpGet]
         public ActionResult Items()
         {
-            var items = _itemService.GetItems(1);
+            var items = _itemService.GetItems();
             return View(items);
         }
 
         [HttpGet]
-        public ActionResult AddItem()
+        public ActionResult AddItem(int itemTypeId)
         {
-            return View();
+            return View(new Item() { ItemType = new ItemTypeService().GetItemTypes(itemTypeId) });
         }
 
         [HttpPost]
         public ActionResult AddItem(Item item)
         {
             _itemService.SaveItem(item);
-            return RedirectToAction("Index");
+            return View(item);
         }
 
         [HttpGet]

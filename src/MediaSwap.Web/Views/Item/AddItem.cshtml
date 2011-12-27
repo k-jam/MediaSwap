@@ -16,13 +16,13 @@
             @Html.LabelFor(model => model.AmazonId)
             @Html.EditorFor(model => model.AmazonId)
             @Html.ValidationMessageFor(model => model.AmazonId)
-            @Html.LabelFor(model => model.MediaId)
-            @Html.EditorFor(model => model.MediaId)
-            @Html.ValidationMessageFor(model => model.MediaId)
+            @Html.HiddenFor(model=>model.ItemType.ItemTypeId)
+
         <div class="actions">
             <input type="submit" class="btn primary" value="Create" />
         </div>
-
+        </div>
+        </div>   
 }
 <div>
     @Html.ActionLink("Back to List", "Index")

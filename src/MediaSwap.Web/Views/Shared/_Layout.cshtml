@@ -80,9 +80,9 @@
             <div class="container">
                 @Html.ActionLink("Media Swap", "Index", "Item", null, new { @class = "brand" })
                 <ul class="nav">
-                    <li><a href="#">Link 1</a></li>
-                    <li><a href="#">Link 2</a></li>
-                    <li><a href="#">Link 3</a></li>
+                    <li><a href="@Url.Action("Index","User",new {id=1})">Profile</a></li>
+                    <li><a href="@Url.Action("UserItems","User",new {id=1})">My Stuff</a></li>
+                    <li><a href="@Url.Action("Index","Search")">Add to Queue</a></li>
                 </ul>
                 <ul class="nav secondary-nav">
                     <li><strong>@(HttpContext.Current.User.Identity.IsAuthenticated ? Html.ActionLink("Logout", "SignOut", "User") : Html.ActionLink("Login", "Login", "User"))</strong></li>

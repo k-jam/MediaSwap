@@ -1,0 +1,16 @@
+﻿@model IEnumerable <MediaSwap.Core.Models.ItemType> 
+
+<select id="ItemType" name="ItemTypeId">
+@{
+    string formatTypeName = "";
+}
+@foreach(var itemType in Model.OrderBy(i=>i.Format.FormatTypeName).ThenBy(i=>i.ItemTypeId)){
+    if (formatTypeName != itemType.Format.FormatTypeName)
+    {
+        formatTypeName = itemType.Format.FormatTypeName;
+        <optgroup label="@formatTypeName"></optgroup>
+    
+    }
+    <option label = "@itemType.ItemTypeName" value="@itemType.ItemTypeId"></option>
+}
+</select>

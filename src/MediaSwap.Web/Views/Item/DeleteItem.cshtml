@@ -20,9 +20,9 @@
             @Html.DisplayFor(model => model.AmazonId)
         </div>
         <div class="display-label">
-            MediaId</div>
+            Item Type</div>
         <div class="display-field">
-            @Html.DisplayFor(model => model.MediaId)
+            @Html.DisplayFor(model => model.ItemType.ItemTypeName)
         </div>
         @Html.HiddenFor(model => model.ItemId)
     </div>

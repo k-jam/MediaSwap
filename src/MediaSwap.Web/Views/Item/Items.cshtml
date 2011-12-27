@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MediaSwap.Core.Models.Item>
+﻿@model MediaSwap.Web.ViewModels.ItemMaintenanceViewModel
 
 @{
     ViewBag.Title = "Items";
@@ -6,33 +6,40 @@
 
 <h2>Items</h2>
 
-<p>
-    @Html.ActionLink("Create New", "AddItem")
+<p> 
+  @using(Html.BeginForm("AddItem", "Item",FormMethod.Get)){   
+       
+      Html.RenderPartial("_ItemTypeSelection",Model.ItemTypes);   
+      <input type="submit" value="Add" />
+        
+  }
+    
+ 
 </p>
 <table>
     <tr>
         <th>
             Item Name
         </th>
+
         <th>
-            Amazon Id
+            Item Type
         </th>
-        <th>
-            Media Id
-        </th>
+        <th> Platform</th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model.Items) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.ItemName)
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Type.ItemTypeName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.AmazonId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MediaId)
+           @Html.DisplayFor(modelItem=>item.Type.Format.FormatTypeName)
         </td>
         <td>
             @Html.ActionLink("Edit", "EditItem", new { id=item.ItemId }) |
