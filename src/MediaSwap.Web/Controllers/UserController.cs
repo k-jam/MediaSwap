@@ -40,7 +40,8 @@ namespace MediaSwap.Web.Controllers
             {
                 IUserService.SaveUser(user);
             }
-            return View(user);
+            Session["UserInfo"] = user;
+            return RedirectToAction("UserItem");
         }
 
         public ActionResult Login()
@@ -96,9 +97,17 @@ namespace MediaSwap.Web.Controllers
                         Session["FriendlyIdentifier"] = response.FriendlyIdentifierForDisplay;
 
                         var sreg = response.GetExtension<ClaimsResponse>();
+                        
                         if (sreg != null)
                         {
                             var email = sreg.Email;
+                            var user = IUserService.GetUser(sreg.Email);
+                            if (user == null)
+                            {
+                                return RedirectToAction("Create");
+                            }
+                            Session["UserId"] = user.UserId;
+
                             // Do something with the values here, like store them in your database for this user.
                         }
 
@@ -123,9 +132,10 @@ namespace MediaSwap.Web.Controllers
             return new EmptyResult();
         }
         [HttpGet]
-        public ActionResult Edit(int id)
+        public ActionResult Edit()
         {
-            return View(IUserService.GetUser(id));
+            var id = (int?)Session["UserId"];
+            return View(IUserService.GetUser(id.Value));
         }
 
         [HttpPost]
@@ -139,9 +149,10 @@ namespace MediaSwap.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult UserItems(int id)
+        public ActionResult UserItems()
         {
-
+           var id = (int) Session["UserId"];
+          
            var user = IUserService.GetUser(id);
 
 
@@ -164,8 +175,9 @@ namespace MediaSwap.Web.Controllers
 
         }
         [HttpPost]
-        public ActionResult UserItems(int userId, List<int> owned )
+        public ActionResult UserItems( List<int> owned )
         {
+            var userId =(int) Session["UserId"];
             owned = owned ?? new List<int>();
             var user = IUserService.GetUser(userId);
             var userItem = user.Items;

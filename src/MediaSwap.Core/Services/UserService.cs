@@ -16,11 +16,11 @@ namespace MediaSwap.Core.Services
             }
         }
 
-        public Models.User GetUser(string token)
+        public Models.User GetUser(string email)
         {
             using (var context = GetContext())
             {
-                return context.User.FirstOrDefault(u => u.Token == token);
+                return context.User.FirstOrDefault(u => u.Email == email);
             }
         }
 
