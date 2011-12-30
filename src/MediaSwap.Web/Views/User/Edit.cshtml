@@ -7,7 +7,7 @@
 @using (Html.BeginForm())
 {   
     <div class="form-stacked">
-    @Html.HiddenFor(m => m.UserId)
+    
     @Html.LabelFor(m => m.UserName)
     @Html.TextBoxFor(m => m.UserName)
     @Html.ValidationMessageFor(m => m.UserName)

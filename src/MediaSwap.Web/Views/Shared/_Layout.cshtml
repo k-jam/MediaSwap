@@ -80,8 +80,8 @@
             <div class="container">
                 @Html.ActionLink("Media Swap", "Index", "Item", null, new { @class = "brand" })
                 <ul class="nav">
-                    <li><a href="@Url.Action("Index","User",new {id=1})">Profile</a></li>
-                    <li><a href="@Url.Action("UserItems","User",new {id=1})">My Stuff</a></li>
+                    <li><a href="@Url.Action("Index","User")">Profile</a></li>
+                    <li><a href="@Url.Action("UserItems","User")">My Stuff</a></li>
                     <li><a href="@Url.Action("Index","Search")">Add to Queue</a></li>
                 </ul>
                 <ul class="nav secondary-nav">
