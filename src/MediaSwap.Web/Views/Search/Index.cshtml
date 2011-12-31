@@ -10,8 +10,8 @@
 <div>
     @Html.Label("Enter Search") 
     @Html.TextBox("search")
-    <input type="submit" value="Search" />
-
+    <input type="submit" value="Search" class="btn primary" />
+    @Html.ActionLink("Add More Items", "Index", "Item", new { }, new {@class="btn" })
 </div>
 <table>
     <tr>

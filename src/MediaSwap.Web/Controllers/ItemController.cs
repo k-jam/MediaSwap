@@ -36,6 +36,7 @@ namespace MediaSwap.Web.Controllers
         [HttpGet]
         public ActionResult Items()
         {
+
             var items = _itemService.GetItems();
             return View(items);
         }
@@ -43,6 +44,9 @@ namespace MediaSwap.Web.Controllers
         [HttpGet]
         public ActionResult AddItem(int itemTypeId)
         {
+            if(!User.Identity.IsAuthenticated){
+                return RedirectToAction("Login","User");
+            }
             return View(new Item() { ItemType = new ItemTypeService().GetItemTypes(itemTypeId) });
         }
 
