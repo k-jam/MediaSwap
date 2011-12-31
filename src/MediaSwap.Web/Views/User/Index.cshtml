@@ -11,12 +11,9 @@
     @Html.TextBoxFor(m => m.FirstName)
     @Html.LabelFor(m => m.LastName)
     @Html.TextBoxFor(m => m.LastName)
-    @Html.LabelFor(m => m.Email)
-    @Html.TextBoxFor(m => m.Email)
-    @Html.LabelFor(m => m.GeoLocation)
-    @Html.TextBoxFor(m => m.GeoLocation)
+
     <div class="actions">
-       @Html.ActionLink("Edit", "Edit", new { @class = "btn primary" })
+       @Html.ActionLink("Edit", "Edit", new { }, new { @class = "btn primary" })
     </div>
 </div>
 

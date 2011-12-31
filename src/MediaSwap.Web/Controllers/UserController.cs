@@ -32,7 +32,7 @@ namespace MediaSwap.Web.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            return View(new User());
+            return View(new User() { });
         }
 
         [HttpPost]
@@ -40,14 +40,16 @@ namespace MediaSwap.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                IUserService.SaveUser(user);
+
+
+                Session["SignupProfile"] = user;
             }
-           
-            return RedirectToAction("UserItem");
+
+           return RedirectToAction("Authenticate");
         }
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            if (!HttpContext.User.Identity.IsAuthenticated && !filterContext.ActionDescriptor.ActionName.Contains("Login") && !filterContext.ActionDescriptor.ActionName.Contains("Authenticate"))
+            if (!HttpContext.User.Identity.IsAuthenticated && !filterContext.ActionDescriptor.ActionName.ToLower().Contains("login") && !filterContext.ActionDescriptor.ActionName.ToLower().Contains("authenticate") && !filterContext.ActionDescriptor.ActionName.ToLower().Contains("create"))
             {
                
                     filterContext.Result = new RedirectToRouteResult(
@@ -113,13 +115,18 @@ namespace MediaSwap.Web.Controllers
                         
                         if (sreg != null)
                         {
-                            var email = sreg.Email;
-                            var user = IUserService.GetUser(sreg.Email);
-                            if (user == null)
+                            User user = Session["SignupProfile"] as User;
+                            if (user != null)
                             {
-                                return RedirectToAction("Create");
+                                user.Email = sreg.Email;
+                                user.Token = sreg.Email;
+
+                                IUserService.SaveUser(user);
                             }
-                            
+                            else
+                            {
+                                user = IUserService.GetUser(sreg.Email);
+                            }
                             // Do something with the values here, like store them in your database for this user.
 
                             var ticket = new FormsAuthenticationTicket(
@@ -167,6 +174,7 @@ namespace MediaSwap.Web.Controllers
         [HttpPost]
         public ActionResult Edit(User user)
         {
+            user.UserId = GetUserId();
             if (ModelState.IsValid)
             {
                 IUserService.SaveUser(user);

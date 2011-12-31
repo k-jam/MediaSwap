@@ -27,17 +27,10 @@ namespace MediaSwap.Core.Models
         [Display(Name="Last Name")]
         public string LastName { get; set; }
  
-        [Required]
-        [Email]
+       
         public string Email { get; set; }
 
-        public string OpenIdUrl { get; set; }
 
-        public string Gravatar { get; set; }
-        
-        [Required]
-        [Display(Name="Geo Loocation")]
-        public string GeoLocation { get; set; }
         public ICollection<Item> Items { get; set; }
 
     }

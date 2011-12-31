@@ -40,11 +40,8 @@ namespace MediaSwap.Core.Services
                     existingUser.UserName = user.UserName;
                     existingUser.FirstName = user.FirstName;
                     existingUser.LastName = user.LastName;
-                    existingUser.OpenIdUrl = user.OpenIdUrl;
-                    existingUser.Token = user.Token;
-                    existingUser.Gravatar = user.Gravatar;
-                    existingUser.GeoLocation = user.GeoLocation;
-                    existingUser.Email = user.Email;
+                    
+                   
 
                 }
 
