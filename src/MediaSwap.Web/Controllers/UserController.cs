@@ -127,6 +127,10 @@ namespace MediaSwap.Web.Controllers
                             else
                             {
                                 user = IUserService.GetUser(sreg.Email);
+                                if (user == null)
+                                {
+                                    return RedirectToAction("Create");
+                                }
                             }
                             // Do something with the values here, like store them in your database for this user.
 
