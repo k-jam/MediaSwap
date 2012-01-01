@@ -16,6 +16,12 @@ section {
 /* Styles for basic forms
 -----------------------------------------------------------*/
 
+.nav-me 
+{
+    background:url('/Content/borrowed_web_sprit_icons.png');
+    background-position : -120px -80px;   
+}
+
 fieldset 
 {
     border:1px solid #ddd;

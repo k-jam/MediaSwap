@@ -41,20 +41,62 @@ namespace MediaSwap.Web.Controllers
             return View(items);
         }
 
+
+        [HttpGet]
+        public ActionResult AddGame()
+        {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "User");
+            }
+
+
+            var addItemViewModel = new AddItemViewModel();
+            addItemViewModel.ItemTypeName = "Game";
+            addItemViewModel.ItemTypes = new ItemTypeService().GetItemTypes("Game");
+            return View("AddItem",addItemViewModel);
+        }
+
+        [HttpGet]
+        public ActionResult AddMovie()
+        {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "User");
+            }
+
+
+            var addItemViewModel = new AddItemViewModel();
+            addItemViewModel.ItemTypeName = "Movie";
+            addItemViewModel.ItemTypes = new ItemTypeService().GetItemTypes("Movie");
+            return View("AddItem", addItemViewModel);
+        }
+
         [HttpGet]
         public ActionResult AddItem(int itemTypeId)
         {
             if(!User.Identity.IsAuthenticated){
                 return RedirectToAction("Login","User");
             }
-            return View(new Item() { ItemType = new ItemTypeService().GetItemTypes(itemTypeId) });
+            var addItemViewModel = new AddItemViewModel();
+            addItemViewModel.ItemTypes =  new ItemTypeService().GetItemTypes(itemTypeId);
+            return View(addItemViewModel);
         }
 
         [HttpPost]
         public ActionResult AddItem(Item item)
         {
+           item.ItemType = new ItemTypeService().GetItemTypes(item.ItemType.ItemTypeId).FirstOrDefault();
             _itemService.SaveItem(item);
-            return View(item);
+            var addItemViewModel = new AddItemViewModel();
+            addItemViewModel.ItemTypeName = item.ItemType.ItemTypeName;
+         
+           
+            addItemViewModel.ItemName = item.ItemName;
+            addItemViewModel.AmazonId = item.AmazonId;
+            addItemViewModel.ItemTypes = new ItemTypeService().GetItemTypes(item.ItemType.ItemTypeName);
+
+            return View(addItemViewModel);
         }
 
         [HttpGet]

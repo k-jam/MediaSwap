@@ -17,8 +17,8 @@ namespace MediaSwap.Core.Repositories
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            //base.OnModelCreating(modelBuilder);
-            Database.SetInitializer<MediaSwapContext>(null);
+            base.OnModelCreating(modelBuilder);
+           // Database.SetInitializer<MediaSwapContext>(null);
         }
     }
 }

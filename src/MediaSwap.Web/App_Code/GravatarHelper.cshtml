@@ -1,0 +1,30 @@
+﻿@using System;
+@using System.Text;
+@using System.Security.Cryptography;
+
+
+@helper GravatarImageString(string email, int size, string style)
+    {
+    email = email ?? "";
+    //Declarations
+    Byte[] originalBytes;
+    Byte[] encodedBytes;
+    MD5 md5;
+
+    //Instantiate MD5CryptoServiceProvider, get bytes for original password and compute hash (encoded password)
+    md5 = new MD5CryptoServiceProvider();
+    originalBytes = ASCIIEncoding.Default.GetBytes(email);
+    encodedBytes = md5.ComputeHash(originalBytes);
+    StringBuilder sBuilder = new StringBuilder();
+
+    // Loop through each byte of the hashed data 
+    // and format each one as a hexadecimal string.
+    for (int i = 0; i < encodedBytes.Length; i++)
+    {
+        sBuilder.Append(encodedBytes[i].ToString("x2"));
+    }
+
+    //Convert encoded bytes back to a 'readable' string
+    var hashTag = sBuilder.ToString();
+    <img src="@string.Format("http://www.gravatar.com/avatar/{0}?s={1}",  hashTag, size)" class="@style" />
+}

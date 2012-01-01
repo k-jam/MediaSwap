@@ -1,4 +1,4 @@
-﻿@model MediaSwap.Core.Models.Item
+﻿@model MediaSwap.Web.ViewModels.AddItemViewModel
 @{
     ViewBag.Title = "Add Item";
 }
@@ -10,13 +10,23 @@
 {
     @Html.ValidationSummary(true)
 <div>
+
         <div class="editor-label">
+            @Html.LabelFor(model=>model.ItemName)
             @Html.EditorFor(model => model.ItemName)
             @Html.ValidationMessageFor(model => model.ItemName)
             @Html.LabelFor(model => model.AmazonId)
             @Html.EditorFor(model => model.AmazonId)
             @Html.ValidationMessageFor(model => model.AmazonId)
-            @Html.HiddenFor(model=>model.ItemType.ItemTypeId)
+            @Html.Label("Format")
+            <select id="ItemType_ItemTypeId" name="ItemType.ItemTypeId">
+               @foreach (var itemType in Model.ItemTypes)
+               {
+               
+                    <option value="@itemType.ItemTypeId" label ="@itemType.Format.FormatTypeName"></option>
+               }
+            
+            </select>
 
         <div class="actions">
             <input type="submit" class="btn primary" value="Create" />

@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using MediaSwap.Web.Util;
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -31,6 +32,34 @@
             -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
             box-shadow: 0 1px 2px rgba(0,0,0,.15);
         }
+        .avatar
+        {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            margin-top: 3px;
+            vertical-align: middle;
+            float: left;
+            display: block;
+        }
+        .size32
+        {
+            width: 32px;
+            height: 32px;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+        }
+        .nav-me
+        {
+            background: url('/Content/borrowed_web_sprite_icons.png');
+            background-position: -120px -80px;
+            height: 21px;
+            display: inline-block;
+            width: 22px;
+        }
+        
+        
         .container > footer
         {
             color: #777;
@@ -70,9 +99,7 @@
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js" type="text/javascript"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"
         type="text/javascript"></script>
-           <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
-  
-
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
 </head>
 <body>
     <div class="topbar">
@@ -80,18 +107,55 @@
             <div class="container">
                 @Html.ActionLink("Media Swap", "Index", "Item", null, new { @class = "brand" })
                 <ul class="nav">
-                    <li><a href="@Url.Action("Index","User")">Profile</a></li>
-                    <li><a href="@Url.Action("UserItems","User")">My Stuff</a></li>
-                    <li><a href="@Url.Action("Index","Search")">Add to Queue</a></li>
+                    <li><a href="@Url.Action("Index", "User")">Profile</a></li>
+                    <li><a href="@Url.Action("UserItems", "User")">My Stuff</a></li>
+                    <li><a href="@Url.Action("Index", "Search")">Add to Queue</a></li>
+                    <li><ul class="nav" data-dropdown="dropdown">
+                           <li>
+                           <a href="@Url.Action("Index", "Item")" class="dropdown-toggle">Add Stuff </a>
+                           <ul class="dropdown-menu dropdown-menu-dark">
+                                <li><a href="@Url.Action("AddGame","Item")">Add Game</a></li>
+                                 <li><a href="@Url.Action("AddMovie","Item")">Add Movie</a></li>
+                           </ul>
+                           </li>
+                    
+                    </ul>
+                    
+                    </li>
                 </ul>
-                <ul class="nav secondary-nav">
-                    <li><strong>@(HttpContext.Current.User.Identity.IsAuthenticated ? Html.ActionLink("Logout", "Logout", "User") : Html.ActionLink("Login", "Login", "User"))</strong></li>
-                </ul>
+                <div class="pull-right">
+                    <ul class="nav" data-dropdown="dropdown">
+                        <li class="dropdown"><a class="dropdown-toggle" href="#"><span class="new-wrapper"><i
+                            class="nav-me"></i></span></a>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                                {
+                            
+                                    <li><a href="@Url.Action("Index", "User")">
+                                        <div style="margin-left: 42px">
+                                            <div style="position: static">
+                                                @GravatarHelper.GravatarImageString(HttpContext.Current.User.Identity.ConvertToSiteUser().Email, 32, "avatar size32")
+                                                <b style="display: block; color: White; font-weight: bold; font-size: 14px">
+                                                    @HttpContext.Current.User.Identity.ConvertToSiteUser().UserName
+                                                </b><small class="metadata">View Profile</small>
+                                            </div>
+                                        </div>
+                                    </a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="@Url.Action("Logout", "User")" >Logout</a></li>    
+                                }
+                                else
+                                {
+                                    <li><a href="@Url.Action("Authenticate", "User")" >Login in with Google</a> </li>
+                                }
+                            </ul>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
     <div class="container">
-        <div class="content">        
+        <div class="content">
             @RenderBody()
         </div>
         <footer>
@@ -101,5 +165,63 @@
     </footer>
     </div>
     @RenderSection("javascript", required: false)
+    <script type="text/javascript">
+
+        /* ============================================================
+        * bootstrap-dropdown.js v1.4.0
+        * http://twitter.github.com/bootstrap/javascript.html#dropdown
+        * ============================================================
+        * Copyright 2011 Twitter, Inc.
+        *
+        * Licensed under the Apache License, Version 2.0 (the "License");
+        * you may not use this file except in compliance with the License.
+        * You may obtain a copy of the License at
+        *
+        * http://www.apache.org/licenses/LICENSE-2.0
+        *
+        * Unless required by applicable law or agreed to in writing, software
+        * distributed under the License is distributed on an "AS IS" BASIS,
+        * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        * See the License for the specific language governing permissions and
+        * limitations under the License.
+        * ============================================================ */
+
+
+        !function ($) {
+
+            "use strict"
+
+            /* DROPDOWN PLUGIN DEFINITION
+            * ========================== */
+
+            $.fn.dropdown = function (selector) {
+                return this.each(function () {
+                    $(this).delegate(selector || d, 'click', function (e) {
+                        var li = $(this).parent('li')
+          , isActive = li.hasClass('open')
+
+                        clearMenus()
+                        !isActive && li.toggleClass('open')
+                        return false
+                    })
+                })
+            }
+
+            /* APPLY TO STANDARD DROPDOWN ELEMENTS
+            * =================================== */
+
+            var d = 'a.menu, .dropdown-toggle'
+
+            function clearMenus() {
+                $(d).parent('li').removeClass('open')
+            }
+
+            $(function () {
+                $('html').bind("click", clearMenus)
+                $('body').dropdown('[data-dropdown] a.menu, [data-dropdown] .dropdown-toggle')
+            })
+
+        } (window.jQuery || window.ender);
+    </script>
 </body>
 </html>

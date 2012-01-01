@@ -6,16 +6,11 @@
 
 <h2>Items</h2>
 
-<p> 
-  @using(Html.BeginForm("AddItem", "Item",FormMethod.Get)){   
-       
-      Html.RenderPartial("_ItemTypeSelection",Model.ItemTypes);   
-      <input type="submit" value="Add" />
-        
-  }
-    
- 
-</p>
+
+<ul class="tabs">
+    <li>@Html.ActionLink("Add Game","AddGame","Item",new {},new{}) </li>
+     <li>@Html.ActionLink("Add Movie","AddMovie","Item",new {},new{}) </li>
+</ul>
 <table>
     <tr>
         <th>

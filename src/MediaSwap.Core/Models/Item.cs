@@ -17,7 +17,7 @@ namespace MediaSwap.Core.Models
 
         [Display(Name="Amazon Id")]
         [Required]
-        public int AmazonId { get; set; }
+        public string AmazonId { get; set; }
 
         public virtual ItemType ItemType { get; set; }
 
