@@ -13,7 +13,7 @@ using MediaSwap.Core.Models;
 using MediaSwap.Core.Services;
 using System.Web.Routing;
 using System.Web;
-
+using MediaSwap.Web.Models;
 namespace MediaSwap.Web.Controllers
 {
     public class UserController : Controller
@@ -27,15 +27,17 @@ namespace MediaSwap.Web.Controllers
         }
         public ActionResult Index()
         {
-            return View(IUserService.GetUser(GetUserId()));
+            return View(IUserService.GetUser((HttpContext.User.Identity as MediaSwapIdentity).Id));
         }
         [HttpGet]
+        [Authorize]
         public ActionResult Create()
         {
             return View(new User() { });
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult Create(User user)
         {
             if (ModelState.IsValid)
@@ -47,18 +49,7 @@ namespace MediaSwap.Web.Controllers
 
            return RedirectToAction("Authenticate");
         }
-        protected override void OnActionExecuting(ActionExecutingContext filterContext)
-        {
-            if (!HttpContext.User.Identity.IsAuthenticated && !filterContext.ActionDescriptor.ActionName.ToLower().Contains("login") && !filterContext.ActionDescriptor.ActionName.ToLower().Contains("authenticate") && !filterContext.ActionDescriptor.ActionName.ToLower().Contains("create"))
-            {
-               
-                    filterContext.Result = new RedirectToRouteResult(
-                        new RouteValueDictionary {{ "Controller", "User" },
-                                      { "Action", "Login" } });
-                
-            }
-            base.OnActionExecuting(filterContext);
-        }
+        
         public ActionResult Login()
         {
             
@@ -133,15 +124,15 @@ namespace MediaSwap.Web.Controllers
                                 }
                             }
                             // Do something with the values here, like store them in your database for this user.
-
+                            var userData = string.Format("{0};{1};{2}", user.UserId, user.UserName, user.Email);
                             var ticket = new FormsAuthenticationTicket(
                                            2, // magic number used by FormsAuth
                                            response.ClaimedIdentifier, // username
                                            DateTime.Now,
                                            DateTime.Now.AddMinutes(30),
                                            false, // "remember me"
-                                           user.UserId.ToString());
-
+                                           userData);
+                            
                             HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, FormsAuthentication.Encrypt(ticket));
                             Response.SetCookie(cookie);
                             Response.Redirect(Request.QueryString["ReturnUrl"] ?? "/");
@@ -170,16 +161,18 @@ namespace MediaSwap.Web.Controllers
             return new EmptyResult();
         }
         [HttpGet]
+        [Authorize]
         public ActionResult Edit()
         {
-           
-            return View(IUserService.GetUser(GetUserId()));
+
+            return View(IUserService.GetUser(MediaSwap.Web.Models.MediaSwapIdentity.Current.Id));
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult Edit(User user)
         {
-            user.UserId = GetUserId();
+            user.UserId = MediaSwap.Web.Models.MediaSwapIdentity.Current.Id;
             if (ModelState.IsValid)
             {
                 IUserService.SaveUser(user);
@@ -187,27 +180,14 @@ namespace MediaSwap.Web.Controllers
             return View(user);
         }
 
-        public int GetUserId()
-        {
-            var cookie = HttpContext.Request.Cookies[FormsAuthentication.FormsCookieName];
-            if (cookie != null)
-            {
-                var ticket = FormsAuthentication.Decrypt(cookie.Value);
-                if (!string.IsNullOrEmpty(ticket.UserData))
-                {
-                    return Convert.ToInt32(ticket.UserData);
-                    // do something cool with the extra data here
-                }
-            }
-            return 0 ;
-        }
-
+        
         [HttpGet]
-        public ActionResult UserItems()
+        [Authorize]
+        public ActionResult Items()
         {
            
           
-           var user = IUserService.GetUser(GetUserId());
+           var user = IUserService.GetUser(MediaSwap.Web.Models.MediaSwapIdentity.Current.Id);
 
 
            IItemService itemService = new ItemService();
@@ -229,9 +209,10 @@ namespace MediaSwap.Web.Controllers
 
         }
         [HttpPost]
-        public ActionResult UserItems( List<int> owned )
+        [Authorize]
+        public ActionResult Items( List<int> owned )
         {
-            var userId =GetUserId();
+            var userId = MediaSwap.Web.Models.MediaSwapIdentity.Current.Id;
             owned = owned ?? new List<int>();
             var user = IUserService.GetUser(userId);
             var userItem = user.Items;
@@ -250,7 +231,7 @@ namespace MediaSwap.Web.Controllers
                    IUserService.RemoveItem(userId, item.ItemId);
                }
            }
-            return RedirectToAction("UserItems");
+            return RedirectToAction("Items");
         }
         public string IsUserNameAvailable(string username)
         {

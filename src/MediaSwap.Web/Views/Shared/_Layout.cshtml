@@ -1,4 +1,4 @@
-﻿@using MediaSwap.Web.Util;
+﻿
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -99,6 +99,7 @@
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js" type="text/javascript"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"
         type="text/javascript"></script>
+         <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
 </head>
 <body>
@@ -108,7 +109,7 @@
                 @Html.ActionLink("Media Swap", "Index", "Item", null, new { @class = "brand" })
                 <ul class="nav">
                     <li><a href="@Url.Action("Index", "User")">Profile</a></li>
-                    <li><a href="@Url.Action("UserItems", "User")">My Stuff</a></li>
+                    <li><a href="@Url.Action("Items", "User")">My Stuff</a></li>
                     <li><a href="@Url.Action("Index", "Search")">Add to Queue</a></li>
                     <li><ul class="nav" data-dropdown="dropdown">
                            <li>
@@ -134,9 +135,10 @@
                                     <li><a href="@Url.Action("Index", "User")">
                                         <div style="margin-left: 42px">
                                             <div style="position: static">
-                                                @GravatarHelper.GravatarImageString(HttpContext.Current.User.Identity.ConvertToSiteUser().Email, 32, "avatar size32")
+                                                @GravatarHelper.GravatarImageString(MediaSwap.Web.Models.MediaSwapIdentity.Current.EmailAddress, 32, "avatar size32")
                                                 <b style="display: block; color: White; font-weight: bold; font-size: 14px">
-                                                    @HttpContext.Current.User.Identity.ConvertToSiteUser().UserName
+                                                    @MediaSwap.Web.Models.MediaSwapIdentity.Current.FriendlyName
+
                                                 </b><small class="metadata">View Profile</small>
                                             </div>
                                         </div>

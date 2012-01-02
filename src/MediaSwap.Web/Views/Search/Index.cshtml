@@ -33,10 +33,22 @@
                @Html.Label(item.ItemType.Format.FormatTypeName)
             </td>
             <td>
-            <a href="">Add to Queue</a>
+             @using (Ajax.BeginForm("AddItem", "Queue", new {itemId=item.ItemId }, new AjaxOptions() { OnFailure = "AddItemFailed()" }))
+             {
+                
+                 <input type="button" value = "Add To Queue" class="btn" />
+             }
             </td>
         </tr>
         }
     }
 </table>
 }
+
+<script type="text/javascript">
+    function AddItemFailed()
+     {
+
+         alert("I failed");
+    }
+</script>

@@ -16,11 +16,12 @@ namespace MediaSwap.Web.Controllers
             return View();
         }
 
-        
-        public ActionResult AddToQueue(int userId, int itemId)
+        [Authorize]
+        public ActionResult AddItem(int itemId)
         {
             IQueueService queueService = new QueueService();
-            queueService.AddItemToQueue(userId, itemId);
+            var user = MediaSwap.Web.Models.MediaSwapIdentity.Current;
+            queueService.AddItemToQueue(user.Id, itemId);
 
             return null;
         }

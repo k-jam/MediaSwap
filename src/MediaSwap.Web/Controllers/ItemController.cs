@@ -9,6 +9,7 @@ using MediaSwap.Web.ViewModels;
 using MediaSwap.Web.Models;
 namespace MediaSwap.Web.Controllers
 {
+    [Authorize]
     public class ItemController : Controller
     {
 
@@ -45,11 +46,7 @@ namespace MediaSwap.Web.Controllers
         [HttpGet]
         public ActionResult AddGame()
         {
-            if (!User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Login", "User");
-            }
-
+         
 
             var addItemViewModel = new AddItemViewModel();
             addItemViewModel.ItemTypeName = "Game";
@@ -107,6 +104,7 @@ namespace MediaSwap.Web.Controllers
         }
 
         [HttpPost]
+      
         public ActionResult EditItem(Item item)
         {
             _itemService.EditItem(item);
@@ -114,6 +112,7 @@ namespace MediaSwap.Web.Controllers
         }
 
         [HttpGet]
+      
         public ActionResult DeleteItem(int id)
         {
             var item = _itemService.GetItem(id);
@@ -121,6 +120,7 @@ namespace MediaSwap.Web.Controllers
         }
 
         [HttpPost]
+       
         public ActionResult DeleteItem(Item item)
         {
             _itemService.DeleteItem(item.ItemId);
