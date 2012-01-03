@@ -18,14 +18,21 @@ namespace MediaSwap.Core.Services
                 if (queue == null)
                 {
                     queue = new Queue();
+
+                    queue.ItemId = itemId;
+                    queue.RequesterId = userId;
+
+                    queue.RequestDate = DateTime.Now;
+                    queue.Status = QueueStatus.Reserved;
+                    context.Queue.Add(queue);
+
+                }
+                else
+                {
+                    context.Queue.Attach(queue);
                 }
 
-                queue.ItemId = itemId;
-                queue.Requester.UserId = userId;
-                queue.RequestDate = DateTime.Now;
-                queue.Status = QueueStatus.Reserved;
-
-                context.Queue.Attach(queue);
+                
 
                 context.SaveChanges();
 

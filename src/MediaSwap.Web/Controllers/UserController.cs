@@ -52,8 +52,9 @@ namespace MediaSwap.Web.Controllers
         
         public ActionResult Login()
         {
-            
-            return View();
+        
+                return View();
+           
         }
 
         public ActionResult Logout()

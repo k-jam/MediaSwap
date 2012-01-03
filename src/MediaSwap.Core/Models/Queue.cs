@@ -22,12 +22,11 @@ namespace MediaSwap.Core.Models
         [ForeignKey("RequesterId")]
         public User Requester { get; set; }
         public int RequesterId { get; set; }
-        [Column("OwnerId")]
-        public User Owner { get; set; }
         public int OwnerId { get; set; }
         public DateTime RequestDate { get; set; }
-        public DateTime BorrowDate { get; set; }
-        public DateTime ReturnDate { get; set; }
+        public DateTime? BorrowDate { get; set; }
+
+        public DateTime? ReturnDate { get; set; }
 
         public int QueueStatusValue { get; set; }
         public QueueStatus Status

@@ -16,6 +16,14 @@ namespace MediaSwap.Web.Controllers
             return View();
         }
 
+        protected override void OnAuthorization(AuthorizationContext filterContext)
+        {
+            if (MediaSwap.Web.Models.MediaSwapIdentity.Current == null)
+            {
+                HttpContext.Response.AddHeader("REQUIRES_AUTH", "1");
+            }
+            base.OnAuthorization(filterContext);
+        }
         [Authorize]
         public ActionResult AddItem(int itemId)
         {

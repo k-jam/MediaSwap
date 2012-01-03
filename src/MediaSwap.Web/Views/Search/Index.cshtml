@@ -33,11 +33,7 @@
                @Html.Label(item.ItemType.Format.FormatTypeName)
             </td>
             <td>
-             @using (Ajax.BeginForm("AddItem", "Queue", new {itemId=item.ItemId }, new AjaxOptions() { OnFailure = "AddItemFailed()" }))
-             {
-                
-                 <input type="button" value = "Add To Queue" class="btn" />
-             }
+                @Ajax.ActionLink("AddItem", "AddItem", "Queue", new { ItemId = item.ItemId }, new AjaxOptions() { OnComplete="AddItemComplete", OnFailure = "AddItemFailed", OnSuccess = "AddItemSuccess" }, new {@class="btn" })
             </td>
         </tr>
         }
@@ -46,9 +42,40 @@
 }
 
 <script type="text/javascript">
-    function AddItemFailed()
+    function AddItemComplete(xmlHttp) {
+        if (xmlHttp.status == 401) {
+            window.location = "/User/Login";
+        }
+    }
+
+    function AddItemSuccess(result, textStatus, jqXHR) {
+
+        if (result.Success && result.ReturnUrl) {
+            location.href = result.ReturnUrl;
+        } else {
+            alert(result.Message);
+        }
+    }
+    function AddItemFailed(result, textStatus, jqXHR)
      {
 
-         alert("I failed");
-    }
+        
+     }
+
+     $(function () {
+
+         $.ajax({
+             statusCode: {
+                 404: function () {
+                     alert('page not found');
+                 }
+                 ,
+                 401: function () {
+                     alert('not authorized');
+                 }
+             }
+         });
+
+     }
+     );
 </script>
