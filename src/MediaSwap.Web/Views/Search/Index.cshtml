@@ -50,11 +50,7 @@
 
     function AddItemSuccess(result, textStatus, jqXHR) {
 
-        if (result.Success && result.ReturnUrl) {
-            location.href = result.ReturnUrl;
-        } else {
-            alert(result.Message);
-        }
+        
     }
     function AddItemFailed(result, textStatus, jqXHR)
      {
