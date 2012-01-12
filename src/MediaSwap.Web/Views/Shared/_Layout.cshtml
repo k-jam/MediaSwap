@@ -110,6 +110,7 @@
                 <ul class="nav">
                     <li><a href="@Url.Action("Index", "User")">Profile</a></li>
                     <li><a href="@Url.Action("Items", "User")">My Stuff</a></li>
+                    <li><a href="@Url.Action("Index","Queue")">My Queue</a></li>
                     <li><a href="@Url.Action("Index", "Search")">Search For Stuff</a></li>
                     <li><ul class="nav" data-dropdown="dropdown">
                            <li>
@@ -158,6 +159,7 @@
     </div>
     <div class="container">
         <div class="content">
+          @MvcMiniProfiler.MiniProfiler.RenderIncludes()
             @RenderBody()
         </div>
         <footer>

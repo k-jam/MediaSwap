@@ -8,28 +8,36 @@ namespace MediaSwap.Web.Controllers
 {
     public class QueueController : Controller
     {
+        IQueueService IQueueService = new QueueService();
         //
         // GET: /Queue/
-
+        [Authorize]
         public ActionResult Index()
         {
-            return View();
+            var queueItems = IQueueService.GetQueue(MediaSwap.Web.Models.MediaSwapIdentity.Current.Id);
+            return View(queueItems);
         }
 
-        protected override void OnAuthorization(AuthorizationContext filterContext)
-        {
-            if (MediaSwap.Web.Models.MediaSwapIdentity.Current == null)
-            {
-                HttpContext.Response.AddHeader("REQUIRES_AUTH", "1");
-            }
-            base.OnAuthorization(filterContext);
-        }
+        //protected override void OnAuthorization(AuthorizationContext filterContext)
+        //{
+        //    if (MediaSwap.Web.Models.MediaSwapIdentity.Current == null)
+        //    {
+        //        HttpContext.Response.AddHeader("REQUIRES_AUTH", "1");
+        //    }
+        //    base.OnAuthorization(filterContext);
+        //}
+
+
         [Authorize]
         public ActionResult AddItem(int itemId)
         {
             IQueueService queueService = new QueueService();
             var user = MediaSwap.Web.Models.MediaSwapIdentity.Current;
-            queueService.AddItemToQueue(user.Id, itemId);
+
+            var itemService = new ItemService();
+            var item = itemService.GetItemWithOwner(itemId);
+            
+            queueService.AddItemToQueue(user.Id, itemId, item.Users.FirstOrDefault().UserId);
 
             return null;
         }

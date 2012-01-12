@@ -23,6 +23,8 @@ namespace MediaSwap.Core.Models
         public User Requester { get; set; }
         public int RequesterId { get; set; }
         public int OwnerId { get; set; }
+        [ForeignKey("OwnerId")]
+        public User Owner { get; set; }
         public DateTime RequestDate { get; set; }
         public DateTime? BorrowDate { get; set; }
 

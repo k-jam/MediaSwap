@@ -16,6 +16,7 @@ using System.Web;
 using MediaSwap.Web.Models;
 namespace MediaSwap.Web.Controllers
 {
+    
     public class UserController : Controller
     {
         private static OpenIdRelyingParty _openId = new OpenIdRelyingParty();
@@ -25,19 +26,20 @@ namespace MediaSwap.Web.Controllers
         {
             IUserService = new UserService();
         }
+        [Authorize]
         public ActionResult Index()
         {
             return View(IUserService.GetUser((HttpContext.User.Identity as MediaSwapIdentity).Id));
         }
         [HttpGet]
-        [Authorize]
+        
         public ActionResult Create()
         {
             return View(new User() { });
         }
 
         [HttpPost]
-        [Authorize]
+        
         public ActionResult Create(User user)
         {
             if (ModelState.IsValid)

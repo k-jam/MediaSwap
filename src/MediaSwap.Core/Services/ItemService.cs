@@ -99,5 +99,17 @@ namespace MediaSwap.Core.Services
                 return items.ToList();
             }
         }
+
+        public Item GetItemWithOwner(int itemId)
+        {
+            using (var context = GetContext())
+            {
+                var items = from item in context.Item.Include("Users")
+                            where item.ItemId == itemId
+                            select item;
+
+                return items.FirstOrDefault();
+            }
+        }
     }
 }

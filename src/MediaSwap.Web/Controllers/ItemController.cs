@@ -18,31 +18,7 @@ namespace MediaSwap.Web.Controllers
         //
         // GET: /Item/
 
-        public ActionResult Index()
-        {
-            var vm = new ItemMaintenanceViewModel() { };
-
-
-            var itemTypeService = new ItemTypeService();
-            
-           
-            vm.ItemTypes = itemTypeService.GetItemTypes();
-            vm.Items = _itemService.GetItems().Select(item => new ViewModels.DisplayItemViewModel() { ItemId = item.ItemId, Name = item.ItemName, Type = item.ItemType });
-
-           
-            return View("Items",vm);
-        }
         
-
-        [HttpGet]
-        public ActionResult Items()
-        {
-
-            var items = _itemService.GetItems();
-            return View(items);
-        }
-
-
         [HttpGet]
         public ActionResult AddGame()
         {
@@ -54,14 +30,28 @@ namespace MediaSwap.Web.Controllers
             return View("AddItem",addItemViewModel);
         }
 
+
+        [HttpPost]
+        public ActionResult AddItem(AddItemViewModel addItemViewModel)
+        {
+
+            var existingItem =  _itemService.Search(addItemViewModel.ItemName).Where(i => i.ItemType.ItemTypeId == addItemViewModel.ItemType.ItemTypeId).FirstOrDefault();
+            if (existingItem == null)
+            {
+                existingItem  = new Item() { ItemName = addItemViewModel.ItemName, AmazonId = addItemViewModel.AmazonId, ItemType = addItemViewModel.ItemType };
+                _itemService.SaveItem(existingItem);
+            }
+            var userService = new UserService();
+            
+            userService.AddItem(MediaSwapIdentity.Current.Id, existingItem.ItemId);
+            addItemViewModel.ItemTypes = new ItemTypeService().GetItemTypes(existingItem.ItemType.ItemTypeId);
+            addItemViewModel.ItemTypeName = existingItem.ItemType.ItemTypeName;
+            addItemViewModel.Status = "Item has been successfully added.";
+            return View(addItemViewModel);
+        }
         [HttpGet]
         public ActionResult AddMovie()
         {
-            if (!User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Login", "User");
-            }
-
 
             var addItemViewModel = new AddItemViewModel();
             addItemViewModel.ItemTypeName = "Movie";
@@ -69,62 +59,6 @@ namespace MediaSwap.Web.Controllers
             return View("AddItem", addItemViewModel);
         }
 
-        [HttpGet]
-        public ActionResult AddItem(int itemTypeId)
-        {
-            if(!User.Identity.IsAuthenticated){
-                return RedirectToAction("Login","User");
-            }
-            var addItemViewModel = new AddItemViewModel();
-            addItemViewModel.ItemTypes =  new ItemTypeService().GetItemTypes(itemTypeId);
-            return View(addItemViewModel);
-        }
 
-        [HttpPost]
-        public ActionResult AddItem(Item item)
-        {
-           item.ItemType = new ItemTypeService().GetItemTypes(item.ItemType.ItemTypeId).FirstOrDefault();
-            _itemService.SaveItem(item);
-            var addItemViewModel = new AddItemViewModel();
-            addItemViewModel.ItemTypeName = item.ItemType.ItemTypeName;
-         
-           
-            addItemViewModel.ItemName = item.ItemName;
-            addItemViewModel.AmazonId = item.AmazonId;
-            addItemViewModel.ItemTypes = new ItemTypeService().GetItemTypes(item.ItemType.ItemTypeName);
-
-            return View(addItemViewModel);
-        }
-
-        [HttpGet]
-        public ActionResult EditItem(int id)
-        {
-            var item = _itemService.GetItem(id);
-            return View(item);
-        }
-
-        [HttpPost]
-      
-        public ActionResult EditItem(Item item)
-        {
-            _itemService.EditItem(item);
-            return RedirectToAction("Index");
-        }
-
-        [HttpGet]
-      
-        public ActionResult DeleteItem(int id)
-        {
-            var item = _itemService.GetItem(id);
-            return View(item);
-        }
-
-        [HttpPost]
-       
-        public ActionResult DeleteItem(Item item)
-        {
-            _itemService.DeleteItem(item.ItemId);
-            return RedirectToAction("Index");
-        }
     }
 }

@@ -12,6 +12,7 @@ namespace MediaSwap.Web.ViewModels
 
         public string ItemTypeName { get; set; }
         public IEnumerable<ItemType> ItemTypes { get; set; }
+        public string Status { get; set; }
       
     }
 }

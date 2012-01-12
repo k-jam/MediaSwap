@@ -9,7 +9,7 @@ namespace MediaSwap.Core.Services
 {
     public class QueueService : BaseContext, IQueueService
     {
-        public Queue AddItemToQueue(int userId, int itemId)
+        public Queue AddItemToQueue(int userId, int itemId, int ownerId)
         {
             using (var context = GetContext())
             {
@@ -21,7 +21,7 @@ namespace MediaSwap.Core.Services
 
                     queue.ItemId = itemId;
                     queue.RequesterId = userId;
-
+                    queue.OwnerId = ownerId;
                     queue.RequestDate = DateTime.Now;
                     queue.Status = QueueStatus.Reserved;
                     context.Queue.Add(queue);
@@ -55,9 +55,9 @@ namespace MediaSwap.Core.Services
         {
             using (var context = GetContext())
             {
-                var queue = context.Queue.Where(q => q.Requester.UserId == userId);
+                var queue = context.Queue.Include("Item").Include("Owner").Where(q => q.Requester.UserId == userId);
                 
-                if (!showReturned)
+                if (showReturned)
                 {
                     queue = queue.Where(q => q.ReturnDate != null);
                 }
