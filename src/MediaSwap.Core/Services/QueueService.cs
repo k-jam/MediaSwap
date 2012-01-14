@@ -65,5 +65,24 @@ namespace MediaSwap.Core.Services
                 return queue.ToList();
             }
         }
+        public Queue GetQueueItem(int queueId)
+        {
+            using (var context = GetContext())
+            {
+                var queue = context.Queue.Where(q=>q.QueueId == queueId).FirstOrDefault();
+                return queue;
+            }
+        }
+
+        public void SaveQueue(Queue queue)
+        {
+            using (var context = GetContext())
+            {
+
+                context.Queue.Attach(queue);
+                context.Entry(queue).State = System.Data.EntityState.Modified;
+                context.SaveChanges();
+            }
+        }
     }
 }

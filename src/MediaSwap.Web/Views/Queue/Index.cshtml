@@ -12,6 +12,7 @@
         <th>Name</th>
         <th>Owner</th>
         <th>Status</th>
+        <th></th>
     </tr>
 </thead>
 <tbody>
@@ -21,6 +22,22 @@
         <td>@item.Item.ItemName </td>
         <td>@item.Owner.UserName</td>
         <td>@item.Status </td>
+
+        
+            @switch (item.Status)
+            {
+                case MediaSwap.Core.Models.QueueStatus.Reserved:
+                <td>    @Html.ActionLink("Borrow", "Borrow", "Queue", new { queueId = item.QueueId }, new { }) </td>
+           break;
+                case MediaSwap.Core.Models.QueueStatus.Loaned:
+                <td> @Html.ActionLink("Return", "Return", "Queue", new { queueId = item.QueueId }, new { })</td>
+                break;
+           default:
+                 <td></td>
+                break;
+            }
+        
+        
         
     </tr>
     

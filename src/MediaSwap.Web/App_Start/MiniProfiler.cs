@@ -15,26 +15,26 @@ namespace MediaSwap.Web.App_Start
     {
         public static void PreStart()
         {
-            MiniProfiler.Settings.SqlFormatter = new MvcMiniProfiler.SqlFormatters.SqlServerFormatter();
+            //MiniProfiler.Settings.SqlFormatter = new MvcMiniProfiler.SqlFormatters.SqlServerFormatter();
             
-            MiniProfilerEF.Initialize();
+            //MiniProfilerEF.Initialize();
 
-            DynamicModuleUtility.RegisterModule(typeof(MiniProfilerStartupModule));
+            //DynamicModuleUtility.RegisterModule(typeof(MiniProfilerStartupModule));
 
-            GlobalFilters.Filters.Add(new ProfilingActionFilter());
+            //GlobalFilters.Filters.Add(new ProfilingActionFilter());
         }
 
         public static void PostStart()
         {
             // Intercept ViewEngines to profile all partial views and regular views
-            var currentViewEngines = ViewEngines.Engines.ToList();
+            //var currentViewEngines = ViewEngines.Engines.ToList();
 
-            ViewEngines.Engines.Clear();
+            //ViewEngines.Engines.Clear();
 
-            foreach (var viewEngine in currentViewEngines)
-            {
-                ViewEngines.Engines.Add(new ProfilingViewEngine(viewEngine));
-            }
+            //foreach (var viewEngine in currentViewEngines)
+            //{
+            //    ViewEngines.Engines.Add(new ProfilingViewEngine(viewEngine));
+            //}
         }
     }
 

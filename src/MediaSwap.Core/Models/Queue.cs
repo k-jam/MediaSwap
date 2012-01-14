@@ -10,7 +10,8 @@ namespace MediaSwap.Core.Models
     public enum QueueStatus
     {
         Reserved = 0,
-        Loaned = 1
+        Loaned = 1,
+        Returned = 2
     }
 
     public class Queue

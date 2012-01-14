@@ -109,21 +109,11 @@
                 @Html.ActionLink("Media Swap", "Index", "Item", null, new { @class = "brand" })
                 <ul class="nav">
                     <li><a href="@Url.Action("Index", "User")">Profile</a></li>
-                    <li><a href="@Url.Action("Items", "User")">My Stuff</a></li>
+                   
+                    <li><a href="@Url.Action("Items", "User")">My Stuff</a> </li>
                     <li><a href="@Url.Action("Index","Queue")">My Queue</a></li>
                     <li><a href="@Url.Action("Index", "Search")">Search For Stuff</a></li>
-                    <li><ul class="nav" data-dropdown="dropdown">
-                           <li>
-                           <a href="@Url.Action("Index", "Item")" class="dropdown-toggle">Add Stuff </a>
-                           <ul class="dropdown-menu dropdown-menu-dark">
-                                <li><a href="@Url.Action("AddGame","Item")">Add Game</a></li>
-                                 <li><a href="@Url.Action("AddMovie","Item")">Add Movie</a></li>
-                           </ul>
-                           </li>
-                    
-                    </ul>
-                    
-                    </li>
+                  
                 </ul>
                 <div class="pull-right">
                     <ul class="nav" data-dropdown="dropdown">

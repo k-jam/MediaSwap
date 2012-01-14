@@ -10,7 +10,10 @@ namespace MediaSwap.Core.Services
     public interface IQueueService
     {
         IEnumerable<Queue> GetQueue(int userId, bool showReturned = false);
+        Queue GetQueueItem(int queueId);
+        void SaveQueue(Queue queue);
         Queue AddItemToQueue(int userId, int itemId, int ownerId);
         void RemoveItemFromQueue(Queue queue);
+
     }
 }

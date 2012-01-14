@@ -41,5 +41,25 @@ namespace MediaSwap.Web.Controllers
 
             return null;
         }
+
+        public ActionResult Borrow(int queueId)
+        {
+            IQueueService queueService = new QueueService();
+            var queue = queueService.GetQueueItem(queueId);
+            queue.BorrowDate = DateTime.Today;
+            queue.Status = Core.Models.QueueStatus.Loaned;
+            queueService.SaveQueue(queue);
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Return(int queueId)
+        {
+            IQueueService queueService = new QueueService();
+            var queue = queueService.GetQueueItem(queueId);
+            queue.ReturnDate = DateTime.Today;
+            queue.Status = Core.Models.QueueStatus.Returned;
+            queueService.SaveQueue(queue);
+            return RedirectToAction("Index");
+        }
     }
 }

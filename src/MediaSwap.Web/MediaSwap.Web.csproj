@@ -205,7 +205,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>2666</DevelopmentServerPort>
+          <DevelopmentServerPort>61291</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost/MediaSwap</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
