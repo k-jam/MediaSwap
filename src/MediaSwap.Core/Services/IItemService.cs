@@ -14,9 +14,10 @@ namespace MediaSwap.Core.Services
         void DeleteItem(int itemId);
 
        
-        IEnumerable<Item> Search(string name);
+        IEnumerable<Item> Search(string name,int? mediaTypeId =null);
 
         IEnumerable<Item> GetItems(int? mediaTypeId = null, bool onlyAvailable = false);
+        
 
     }
 }

@@ -1,5 +1,14 @@
-﻿@{
-  ViewBag.Title = "Items";
+﻿@model IEnumerable<MediaSwap.Core.Models.Item>
+@{
+    Layout = "_ItemLayoutPage.cshtml";
+    ViewBag.Title = "UserItems";
 }
-<h2>
-  Items</h2>
+
+
+<script type="text/javascript">
+    $(function () {
+        $("#liAll").addClass("active");
+    });
+
+
+</script>

@@ -69,11 +69,13 @@
     <Compile Include="Services\IFormatService.cs" />
     <Compile Include="Services\IQueueService.cs" />
     <Compile Include="Services\ItemService.cs" />
-    <Compile Include="Services\IUserService.cs" />
+    <Compile Include="Services\IProfileService.cs" />
     <Compile Include="Services\ItemTypeService.cs" />
     <Compile Include="Services\FormatService.cs" />
+    <Compile Include="Services\IUserItemService.cs" />
     <Compile Include="Services\QueueService.cs" />
-    <Compile Include="Services\UserService.cs" />
+    <Compile Include="Services\ProfileService.cs" />
+    <Compile Include="Services\UserItemService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

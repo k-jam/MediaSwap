@@ -26,5 +26,5 @@
 
     //Convert encoded bytes back to a 'readable' string
     var hashTag = sBuilder.ToString();
-    <img src="@string.Format("http://www.gravatar.com/avatar/{0}?s={1}",  hashTag, size)" class="@style" />
+    @string.Format("http://www.gravatar.com/avatar/{0}?s={1}",  hashTag, size)
 }

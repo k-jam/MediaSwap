@@ -62,7 +62,7 @@ namespace MediaSwap.Core.Services
             }
         }
 
-        public IEnumerable<Models.Item> Search(string name)
+        public IEnumerable<Models.Item> Search(string name, int? mediaTypeId = null)
         {
             IEnumerable<Models.Item> items;
             using (var context = GetContext())
@@ -74,6 +74,10 @@ namespace MediaSwap.Core.Services
                 else
                 {
                     items = context.Item.Include("ItemType.Format").Where(i => i.ItemName.ToUpper().Contains(name.ToUpper()));
+                }
+                if (mediaTypeId != null)
+                {
+                    items.Where(i => i.ItemType.ItemTypeId == mediaTypeId);
                 }
                 return items.ToList();
             }

@@ -13,12 +13,25 @@ namespace MediaSwap.Web.Controllers
     public class ItemController : Controller
     {
 
-        IItemService _itemService = new ItemService();
+        IUserItemService IUserItemService = new UserItemService();
+       
 
-        //
-        // GET: /Item/
 
-        
+        public ActionResult Index()
+        {
+         
+            return View(IUserItemService.GetItems(MediaSwapIdentity.Current.Id));
+        }
+
+        public ActionResult Movies()
+        {
+            return View(IUserItemService.GetItems(MediaSwapIdentity.Current.Id,"Movie"));
+        }
+
+        public ActionResult Games()
+        {
+            return View(IUserItemService.GetItems(MediaSwapIdentity.Current.Id, "Game"));
+        }
         [HttpGet]
         public ActionResult AddGame()
         {
@@ -27,28 +40,27 @@ namespace MediaSwap.Web.Controllers
             var addItemViewModel = new AddItemViewModel();
             addItemViewModel.ItemTypeName = "Game";
             addItemViewModel.ItemTypes = new ItemTypeService().GetItemTypes("Game");
-            return View("AddItem",addItemViewModel);
+            return View("Add",addItemViewModel);
         }
 
 
         [HttpPost]
         public ActionResult AddItem(AddItemViewModel addItemViewModel)
         {
-
-            var existingItem =  _itemService.Search(addItemViewModel.ItemName).Where(i => i.ItemType.ItemTypeId == addItemViewModel.ItemType.ItemTypeId).FirstOrDefault();
+            IItemService _itemService = new ItemService();
+            var existingItem = _itemService.Search(addItemViewModel.ItemName, addItemViewModel.ItemType.ItemTypeId).FirstOrDefault();
             if (existingItem == null)
             {
                 existingItem  = new Item() { ItemName = addItemViewModel.ItemName, AmazonId = addItemViewModel.AmazonId, ItemType = addItemViewModel.ItemType };
                 _itemService.SaveItem(existingItem);
             }
-            var userService = new UserService();
-            
-            userService.AddItem(MediaSwapIdentity.Current.Id, existingItem.ItemId);
+            IUserItemService.Add(existingItem.ItemId, MediaSwapIdentity.Current.Id);
             addItemViewModel.ItemTypes = new ItemTypeService().GetItemTypes(existingItem.ItemType.ItemTypeId);
             addItemViewModel.ItemTypeName = existingItem.ItemType.ItemTypeName;
             addItemViewModel.Status = "Item has been successfully added.";
-            return View(addItemViewModel);
+            return View("Add",addItemViewModel);
         }
+      
         [HttpGet]
         public ActionResult AddMovie()
         {
@@ -56,9 +68,9 @@ namespace MediaSwap.Web.Controllers
             var addItemViewModel = new AddItemViewModel();
             addItemViewModel.ItemTypeName = "Movie";
             addItemViewModel.ItemTypes = new ItemTypeService().GetItemTypes("Movie");
-            return View("AddItem", addItemViewModel);
+            return View("Add", addItemViewModel);
         }
 
-
+      
     }
 }

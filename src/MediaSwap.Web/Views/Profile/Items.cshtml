@@ -1,0 +1,65 @@
+﻿@model MediaSwap.Web.ViewModels.UserItemEditViewModel
+@{
+    ViewBag.Title = "UserItems";
+}
+
+<h2>My Stuff</h2>
+
+
+<ul class="tabs">
+    <li id="liAll">@Html.ActionLink("All Items","Items","User") </li>
+    <li id="liAddMovie">
+        @Html.ActionLink("Add Movie","AddMovie","Item")
+    </li>
+      <li id="liAddGame">
+        @Html.ActionLink("Add Game","AddGame", "Item")
+    </li>
+</ul>
+
+@using(Html.BeginForm())
+{
+  
+ 
+    <table>
+
+
+    <thead>
+    
+    <tr>
+        <th>Own</th>
+        <th>Description</th>
+        <th>Format</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+      @foreach (var item in Model.Items)
+      {
+       <tr>
+          <td>
+           @{
+                var chk = @item.Owned ? "checked" : "";   
+            }
+           <input type="checkbox" name="owned" @chk value="@item.Item.ItemId" />
+            
+          </td>
+          <td>
+           @item.Item.ItemName
+          
+          </td>
+          <td>@item.Item.ItemType.Format.FormatTypeName</td>
+     </tr>
+     
+    }                                                                            
+    </tbody>   
+  </table>
+  <input class="btn" type="submit"  value="Update"/>
+}
+
+<script type="text/javascript">
+    $(function () {
+        $("#liAll").addClass("active");
+    });
+
+
+</script>

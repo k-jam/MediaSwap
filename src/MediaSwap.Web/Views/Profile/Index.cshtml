@@ -1,0 +1,20 @@
+﻿@model MediaSwap.Core.Models.User
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="form-stacked">
+
+    @Html.LabelFor(m => m.UserName)
+    @Html.TextBoxFor(m => m.UserName)
+    @Html.LabelFor(m => m.FirstName)
+    @Html.TextBoxFor(m => m.FirstName)
+    @Html.LabelFor(m => m.LastName)
+    @Html.TextBoxFor(m => m.LastName)
+
+    <div class="actions">
+       @Html.ActionLink("Edit", "Edit", new { }, new { @class = "btn primary" })
+    </div>
+</div>
+
+

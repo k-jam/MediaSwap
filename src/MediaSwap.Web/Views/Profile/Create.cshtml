@@ -1,0 +1,34 @@
+﻿@model MediaSwap.Core.Models.User
+@{
+    ViewBag.Title = "Create";
+}
+
+@using (Html.BeginForm())
+{
+<div class="form-stacked">
+
+
+    @Html.LabelFor(m => m.UserName)
+    @Html.TextBoxFor(m => m.UserName)
+
+    @Html.LabelFor(m => m.FirstName)
+    @Html.TextBoxFor(m => m.FirstName)
+
+    @Html.LabelFor(m => m.LastName)
+    @Html.TextBoxFor(m => m.LastName)
+
+
+
+    <div class="actions">
+        <input type="submit" value ="Sign up using your Google Id" id="btnCreates" class="btn primary" />
+    </div>
+</div>
+
+}
+
+<script type="text/javascript">
+ 
+
+
+
+</script>

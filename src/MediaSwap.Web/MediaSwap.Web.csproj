@@ -98,7 +98,7 @@
     <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Controllers\QueueController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -140,17 +140,17 @@
     <Content Include="Views\Item\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\Profile\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Search\Index.cshtml" />
-    <Content Include="Views\Item\AddItem.cshtml" />
+    <Content Include="Views\Item\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\User\Create.cshtml" />
+    <Content Include="Views\Profile\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\Profile\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MediaSwap.Core\MediaSwap.Core.csproj">
@@ -159,22 +159,16 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Item\EditItem.cshtml" />
+    <Content Include="Views\Item\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\Profile\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Item\DeleteItem.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Item\Items.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\User\Items.cshtml" />
+    <Content Include="Views\Profile\Items.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Item\_ItemTypeSelection.cshtml" />
@@ -187,6 +181,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Queue\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Item\_ItemLayoutPage.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Item\Movies.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Item\Games.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

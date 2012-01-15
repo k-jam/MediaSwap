@@ -5,15 +5,16 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@using (Html.BeginForm()){
+@using (Html.BeginForm("", "", FormMethod.Post, new { @class = "search-form" }))
+{
    
-<div>
-    @Html.Label("Enter Search") 
-    @Html.TextBox("search")
+
+   
+    @Html.TextBox("search", "", new { @placeholder="by name" })
     <input type="submit" value="Search" class="btn primary" />
-  
-</div>
-<table>
+}  
+
+<table class="">
     <tr>
         <th>
           Name
@@ -33,13 +34,13 @@
                @Html.Label(item.ItemType.Format.FormatTypeName)
             </td>
             <td>
-                @Ajax.ActionLink("Add To Queue", "AddItem", "Queue", new { ItemId = item.ItemId }, new AjaxOptions() { OnComplete="AddItemComplete", OnFailure = "AddItemFailed", OnSuccess = "AddItemSuccess" }, new {@class="btn" })
+                @Ajax.ActionLink("Add To Queue", "AddItem", "Queue", new { ItemId = item.ItemId }, new AjaxOptions() { OnComplete="AddItemComplete", OnFailure = "AddItemFailed", OnSuccess = "AddItemSuccess" }, new { })
             </td>
         </tr>
         }
     }
 </table>
-}
+
 
 <script type="text/javascript">
     function AddItemComplete(xmlHttp) {
