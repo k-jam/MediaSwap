@@ -12,7 +12,7 @@
 <div>
 
         <div class="editor-label">
-            @Html.LabelFor(model=>model.ItemName)
+            @Html.Label("Name")
             @Html.EditorFor(model => model.ItemName)
             @Html.ValidationMessageFor(model => model.ItemName)
             @Html.LabelFor(model => model.AmazonId)
@@ -34,7 +34,7 @@
             </div>
             }
             
-        <div class="actions">
+        <div class="form-actions">
             <input type="submit" class="btn primary" value="Add" />
         </div>
         </div>
