@@ -26,17 +26,12 @@
     {
         foreach (var item in Model.ItemResults)
         {
-        <tr>
-            <td>
-                 @Html.Label(item.ItemName.ToString())
-            </td>
-            <td>
-               @Html.Label(item.ItemType.Format.FormatTypeName)
-            </td>
-            <td>
-                @Ajax.ActionLink("Add To Queue", "AddItem", "Queue", new { ItemId = item.ItemId }, new AjaxOptions() { OnComplete="AddItemComplete", OnFailure = "AddItemFailed", OnSuccess = "AddItemSuccess" }, new { })
-            </td>
-        </tr>
+            <tr id="@item.Item.ItemId.ToString()">
+            
+            @{
+                Html.RenderPartial("_ItemView", item);
+            }
+             </tr>
         }
     }
 </table>

@@ -9,6 +9,20 @@ namespace MediaSwap.Web.ViewModels
 {
     public class SearchItemViewModel
     {
-        public IEnumerable<Item> ItemResults { get; set; } 
+        public class ItemResult
+        {
+            public Item Item
+            {
+                get;
+                set;
+            }
+            public QueueStatus? Status
+            {
+                get;
+                set;
+            }
+        }
+
+        public IEnumerable<ItemResult> ItemResults { get; set; } 
     }
 }

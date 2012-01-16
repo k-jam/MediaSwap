@@ -39,7 +39,11 @@ namespace MediaSwap.Web.Controllers
             
             queueService.AddItemToQueue(user.Id, itemId, item.Users.FirstOrDefault().UserId);
 
-            return null;
+            
+            var queueItem = new MediaSwap.Web.ViewModels.SearchItemViewModel.ItemResult();
+            queueItem.Status = MediaSwap.Core.Models.QueueStatus.Reserved;
+            queueItem.Item  = itemService.GetItem(item.ItemId);
+            return View("~/Views/Search/_ItemView.cshtml", queueItem);
         }
 
         public ActionResult Borrow(int queueId)

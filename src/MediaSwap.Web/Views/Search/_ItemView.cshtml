@@ -1,0 +1,34 @@
+﻿@model MediaSwap.Web.ViewModels.SearchItemViewModel.ItemResult
+       
+@{
+    Layout = null;
+}
+
+    <td>
+        @Html.Label(Model.Item.ItemName.ToString())
+    </td>
+    <td>
+        @Html.Label(Model.Item.ItemType.Format.FormatTypeName)
+    </td>
+    <td>
+        @if (Model.Status == null || Model.Status== MediaSwap.Core.Models.QueueStatus.Returned)
+        {
+            @Ajax.ActionLink("Add to Queue", "AddItem", "Queue", new { ItemId = Model.Item.ItemId }, new AjaxOptions() { OnComplete = "AddItemComplete", OnFailure = "AddItemFailed", OnSuccess = "AddItemSuccess", UpdateTargetId=@Model.Item.ItemId.ToString() , InsertionMode= InsertionMode.Replace }, new { })
+        }
+        else
+        {
+            switch(Model.Status)
+            {
+                case MediaSwap.Core.Models.QueueStatus.Reserved:
+                    
+                //   @Ajax.ActionLink("Remove from Queue", "RemoveItem", "Queue", new { ItemId = Model.Item.ItemId }, new AjaxOptions() { OnComplete = "AddItemComplete", OnFailure = "AddItemFailed", OnSuccess = "AddItemSuccess" }, new { })
+                    <span>@Model.Status.Value</span>  
+                   break;
+            
+            
+            
+            }
+        
+        
+        }
+    </td>
