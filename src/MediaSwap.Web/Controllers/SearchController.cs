@@ -18,8 +18,18 @@ namespace MediaSwap.Web.Controllers
         public ActionResult Index()
         {
             SearchItemViewModel searchItemViewModel = new SearchItemViewModel();
-            //ItemService iss = new ItemService();
-            //searchItemViewModel.ItemResults = iss.Search(search.Value.ToString()).ToList();
+            ItemService iss = new ItemService();
+            var queueItems = new QueueService().GetQueue(MediaSwap.Web.Models.MediaSwapIdentity.Current.Id);
+
+            searchItemViewModel.ItemResults = iss.Search("").Select(s => new SearchItemViewModel.ItemResult() { Item = s }).ToList();
+            foreach (var queueItem in queueItems)
+            {
+                var searchItem = searchItemViewModel.ItemResults.FirstOrDefault(i => i.Item.ItemId == queueItem.ItemId);
+                if (searchItem != null)
+                {
+                    searchItem.Status = queueItem.Status;
+                }
+            }
             return View(searchItemViewModel);
         }
 
