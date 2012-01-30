@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MediaSwap.Core.Services;
+using System.Net.Mail;
 namespace MediaSwap.Web.Controllers
 {
     public class QueueController : Controller
@@ -33,13 +34,17 @@ namespace MediaSwap.Web.Controllers
         {
             IQueueService queueService = new QueueService();
             var user = MediaSwap.Web.Models.MediaSwapIdentity.Current;
-
+            
             var itemService = new ItemService();
             var item = itemService.GetItemWithOwner(itemId);
             
             queueService.AddItemToQueue(user.Id, itemId, item.Users.FirstOrDefault().UserId);
 
-            
+
+            SmtpClient client = new SmtpClient();
+            var message = string.Format("{0} has reserved {1}.", user.FriendlyName, item.ItemName);
+            client.Send(new MailMessage("MediaSwap@CraftyCoders.com", item.Users.FirstOrDefault().Email) { Subject="MediaSwap Item Reserved", Body = message, IsBodyHtml = true });
+           
             var queueItem = new MediaSwap.Web.ViewModels.SearchItemViewModel.ItemResult();
             queueItem.Status = MediaSwap.Core.Models.QueueStatus.Reserved;
             queueItem.Item  = itemService.GetItem(item.ItemId);

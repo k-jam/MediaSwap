@@ -13,11 +13,11 @@ namespace MediaSwap.Core.Services
         {
             using (var context = GetContext())
             {
-                var queue = context.Queue.FirstOrDefault(q => q.Requester.UserId == userId && q.ItemId == itemId);
+              //  var queue = context.Queue.FirstOrDefault(q => q.Requester.UserId == userId && q.ItemId == itemId);
 
-                if (queue == null)
-                {
-                    queue = new Queue();
+               // if (queue == null)
+               // {
+                  var  queue = new Queue();
 
                     queue.ItemId = itemId;
                     queue.RequesterId = userId;
@@ -26,11 +26,11 @@ namespace MediaSwap.Core.Services
                     queue.Status = QueueStatus.Reserved;
                     context.Queue.Add(queue);
 
-                }
-                else
-                {
-                    context.Queue.Attach(queue);
-                }
+                //}
+                //else
+                //{
+                  //  context.Queue.Attach(queue);
+                //}
 
                 
 
@@ -55,7 +55,7 @@ namespace MediaSwap.Core.Services
         {
             using (var context = GetContext())
             {
-                var queue = context.Queue.Include("Item").Include("Owner").Where(q => q.Requester.UserId == userId);
+                var queue = context.Queue.Include("Item").Include("Owner").Where(q => q.Requester.UserId == userId && q.ReturnDate == null);
                 
                 if (showReturned)
                 {

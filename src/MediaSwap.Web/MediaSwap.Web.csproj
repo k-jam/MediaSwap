@@ -105,6 +105,7 @@
     <Compile Include="Models\DisplayItemType.cs" />
     <Compile Include="Models\MediaSwapIdentity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util\CraftyMail.cs" />
     <Compile Include="ViewModels\AddItemViewModel.cs" />
     <Compile Include="ViewModels\DisplayItemViewModel.cs" />
     <Compile Include="ViewModels\ItemMaintenanceViewModel.cs" />
@@ -176,9 +177,7 @@
   <ItemGroup>
     <Content Include="App_Code\GravatarHelper.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Util\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Views\Queue\Index.cshtml" />
   </ItemGroup>
