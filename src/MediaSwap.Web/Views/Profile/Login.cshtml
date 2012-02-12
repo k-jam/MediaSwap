@@ -6,5 +6,5 @@
 @using (Html.BeginForm("Authenticate", "Profile", new { }, FormMethod.Get, new { }))
 {
   @Html.Hidden("returnUrl",Request.QueryString["ReturnUrl"]);
-  <input type="submit" value="Sign In With Google" class="btn primary" />
+  <input type="submit" value="Sign In With Google" class="btn btn-primary" />
 }
