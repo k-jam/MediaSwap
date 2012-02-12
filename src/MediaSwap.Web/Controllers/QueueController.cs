@@ -54,20 +54,23 @@ namespace MediaSwap.Web.Controllers
         public ActionResult Borrow(int queueId)
         {
             IQueueService queueService = new QueueService();
-            var queue = queueService.GetQueueItem(queueId);
-            queue.BorrowDate = DateTime.Today;
-            queue.Status = Core.Models.QueueStatus.Loaned;
-            queueService.SaveQueue(queue);
+            queueService.BorrowQueueItem(queueId);
             return RedirectToAction("Index");
         }
 
         public ActionResult Return(int queueId)
         {
             IQueueService queueService = new QueueService();
-            var queue = queueService.GetQueueItem(queueId);
-            queue.ReturnDate = DateTime.Today;
-            queue.Status = Core.Models.QueueStatus.Returned;
-            queueService.SaveQueue(queue);
+
+            queueService.ReturnQueueItem(queueId);
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Remove(int queueId)
+        {
+            IQueueService queueService = new QueueService();
+
+            queueService.RemoveItemFromQueue(queueId);
             return RedirectToAction("Index");
         }
     }

@@ -27,7 +27,22 @@
             @switch (item.Status)
             {
                 case MediaSwap.Core.Models.QueueStatus.Reserved:
-                <td>    @Html.ActionLink("Borrow", "Borrow", "Queue", new { queueId = item.QueueId }, new { }) </td>
+                <td>    
+                
+                <div class="btn-group">
+                     <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+    Action
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu">
+              @Html.ActionLink("Borrow", "Borrow", "Queue", new { queueId = item.QueueId }, new { }) 
+              @Html.ActionLink("Remove", "Remove", "Queue", new { queueId = item.QueueId }, new { }) 
+      
+  </ul>
+</div>
+           </td>
+                
+                
            break;
                 case MediaSwap.Core.Models.QueueStatus.Loaned:
                 <td> @Html.ActionLink("Return", "Return", "Queue", new { queueId = item.QueueId }, new { })</td>

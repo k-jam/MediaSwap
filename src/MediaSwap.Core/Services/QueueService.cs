@@ -40,11 +40,11 @@ namespace MediaSwap.Core.Services
             }
         }
 
-        public void RemoveItemFromQueue(Queue queue)
+        public void RemoveItemFromQueue(int  queueId)
         {
             using (var context = GetContext())
             {
-                context.Queue.Attach(queue);
+                var queue = context.Queue.FirstOrDefault(q => q.QueueId == queueId);
                 context.Queue.Remove(queue);
 
                 context.SaveChanges();
@@ -74,6 +74,34 @@ namespace MediaSwap.Core.Services
             }
         }
 
+        public void BorrowQueueItem(int queueId)
+        {
+            using (var context = GetContext())
+            {
+                var queue = context.Queue.FirstOrDefault(q => q.QueueId == queueId);
+                if ((QueueStatus)queue.QueueStatusValue == QueueStatus.Reserved)
+                {
+                    queue.BorrowDate = DateTime.Now;
+                    queue.QueueStatusValue = (int)QueueStatus.Loaned;
+                }
+
+                context.SaveChanges();
+            }
+        }
+        public void ReturnQueueItem(int queueId)
+        {
+            using (var context = GetContext())
+            {
+                var queue = context.Queue.FirstOrDefault(q => q.QueueId == queueId);
+                if ((QueueStatus)queue.QueueStatusValue == QueueStatus.Loaned)
+                {
+                    queue.ReturnDate = DateTime.Now;
+                    queue.QueueStatusValue = (int) QueueStatus.Returned;
+                }
+                
+                context.SaveChanges();
+            }
+        }
         public void SaveQueue(Queue queue)
         {
             using (var context = GetContext())

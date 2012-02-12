@@ -13,7 +13,8 @@ namespace MediaSwap.Core.Services
         Queue GetQueueItem(int queueId);
         void SaveQueue(Queue queue);
         Queue AddItemToQueue(int userId, int itemId, int ownerId);
-        void RemoveItemFromQueue(Queue queue);
-
+        void RemoveItemFromQueue(int queueId);
+        void ReturnQueueItem(int queueId);
+        void BorrowQueueItem(int queueId);
     }
 }
