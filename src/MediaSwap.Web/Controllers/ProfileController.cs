@@ -132,8 +132,8 @@ namespace MediaSwap.Web.Controllers
                                            2, // magic number used by FormsAuth
                                            response.ClaimedIdentifier, // username
                                            DateTime.Now,
-                                           DateTime.Now.AddMinutes(30),
-                                           false, // "remember me"
+                                           DateTime.Now.AddDays(30),
+                                           true, // "remember me"
                                            userData);
                             
                             HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, FormsAuthentication.Encrypt(ticket));
