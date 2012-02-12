@@ -137,7 +137,12 @@ namespace MediaSwap.Web.Controllers
                                            userData);
                             
                             HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, FormsAuthentication.Encrypt(ticket));
+                            if (ticket.IsPersistent)
+                            {
+                                cookie.Expires = ticket.Expiration;
+                            }
                             Response.SetCookie(cookie);
+
                             Response.Redirect(Request.QueryString["ReturnUrl"] ?? "/");
       
                            
