@@ -1,10 +1,8 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>My Media</h2>
-
-
+<h2>
+    My Media</h2>
 @*<ul class="tabs">
     <li id="liAll">@Html.ActionLink("All Items","Index") </li>
     <li id="liMovies">
@@ -14,44 +12,52 @@
         @Html.ActionLink("Games", "Games", "Item")
     </li>
 </ul>*@
-
 @RenderBody()
-
- <table class="table">
-
-
+<table class="table">
     <thead>
-    
-    <tr>
-       
-        <th>Description</th>
-        <th>Format</th>
-    </tr>
+        <tr>
+            <th>
+                Description
+            </th>
+            <th>
+                Format
+            </th>
+            <th></th>
+        </tr>
     </thead>
     <tbody>
-    
-      @foreach (var item in Model)
-      {
-       <tr>
-          <td>
-           @item.ItemName
-          
-          </td>
-          <td>@item.ItemType.Format.FormatTypeName</td>
-     </tr>
+        @foreach (MediaSwap.Core.Models.Item item in Model)
+        {
+            <tr>
+                <td>
+                    @item.ItemName
+                </td>
+                <td>@item.ItemType.Format.FormatTypeName
+                </td>
+                <td>
+                    @if (item.Queues.Any(e => e.QueueStatusValue == 1))
+                    {
+                        <span class="label label-important">Loaned</span>
+                    }
+                    else
+                    { 
+                        @Html.ActionLink("Delete", "DeleteItem", new { id = item.ItemId })
+                        @*<a href="/Item/DeleteIem/@item.ItemId" class="btn btn-danger">
+                            <i class="icon-trash icon-white"></i>
+                            Delete
+                        </a>*@
+                    }
+                </td>
+            </tr>
      
-      }                                                                            
-    </tbody>   
-  </table>
-
+        }
+    </tbody>
+</table>
 <div class="btn-group">
- <a class="btn" href="#">Add Media</a>
- <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
- <span class="caret"></span>
- </a>
- <ul class="dropdown-menu">   
- <li> @Html.ActionLink("Add Movie","AddMovie")</li>
-  <li>@Html.ActionLink("Add Game","AddGame")</li>
- </ul>
- </div>
-
+    <a class="btn" href="#">Add Media</a> <a class="btn dropdown-toggle" data-toggle="dropdown"
+        href="#"><span class="caret"></span></a>
+    <ul class="dropdown-menu">
+        <li>@Html.ActionLink("Add Movie", "AddMovie")</li>
+        <li>@Html.ActionLink("Add Game", "AddGame")</li>
+    </ul>
+</div>
