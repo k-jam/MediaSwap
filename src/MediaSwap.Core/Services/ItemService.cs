@@ -13,7 +13,7 @@ namespace MediaSwap.Core.Services
         {
             using (var context = GetContext())
             {
-                var item = context.Item.Include("ItemType.Format").Where(i => i.ItemId == itemId).FirstOrDefault();
+                var item = context.Item.Include("ItemType.Format").Include("Queues").Where(i => i.ItemId == itemId).FirstOrDefault();
 
                 return item;                
             }   

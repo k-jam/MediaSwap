@@ -33,7 +33,7 @@ namespace MediaSwap.Core.Services
         {
             using (var context = GetContext())
             {
-                return context.User.Include("Items").Include("Items.ItemType").Include("Items.ItemType.Format").FirstOrDefault(u => u.UserId == userId).Items.ToList();
+                return context.User.Include("Items").Include("Items.Queues").Include("Items.ItemType").Include("Items.ItemType.Format").FirstOrDefault(u => u.UserId == userId).Items.ToList();
             }
         }
     }
