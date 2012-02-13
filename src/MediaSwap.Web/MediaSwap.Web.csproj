@@ -185,7 +185,9 @@
   <ItemGroup>
     <Content Include="App_Code\GravatarHelper.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Views\Item\DeleteItem.cshtml" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Queue\Index.cshtml" />
   </ItemGroup>
