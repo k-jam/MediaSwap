@@ -1,7 +1,7 @@
 Members:
 Matt Chandler
 Chris Albrecht
-Michael Green
+Michael Green - yeah
 Bradley Lower 
 Gary Bryant
 Paul Jeanquart
