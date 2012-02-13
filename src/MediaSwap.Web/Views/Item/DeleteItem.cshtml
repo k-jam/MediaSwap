@@ -1,0 +1,57 @@
+﻿@model MediaSwap.Core.Models.Item
+@{
+    ViewBag.Title = "Delete Item";
+}
+@section style
+{
+    <style type="text/css">
+        .btn /* this seems to be the only thing that aligns buttons and anchors within a form-actions div */
+        {
+            vertical-align: baseline;
+        }
+    </style>
+}
+<h2>
+    Delete Item</h2>
+<h3>
+    Are you sure you want to delete this Item?</h3>
+@using (Html.BeginForm("DeleteItem", "Item", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.HiddenFor(model => model.ItemId)
+    @Html.ValidationSummary(true, "", new { @class= "alert alert-error" })
+
+    <div class="control-group">
+        @Html.LabelFor(model => model.ItemName)
+        <div class="controls">
+            @Html.TextBoxFor(model => model.ItemName, new { @class = "span5", @readonly = "readonly" })
+        </div>
+    </div>
+    <div class="control-group">
+        @Html.LabelFor(model => model.ItemType.ItemTypeName)
+        <div class="controls">
+            @Html.TextBoxFor(model => model.ItemType.ItemTypeName, new { @readonly = "readonly" })
+        </div>
+    </div>
+    <div class="control-group">
+        @Html.LabelFor(model => model.ItemType.Format.FormatTypeName)
+        <div class="controls">
+            @Html.TextBoxFor(model => model.ItemType.Format.FormatTypeName, new { @readonly = "readonly" })
+        </div>
+    </div>
+    <div class="control-group">
+        @Html.LabelFor(model => model.AmazonId)
+        <div class="controls">
+            @Html.TextBoxFor(model => model.AmazonId, new { @readonly = "readonly" })
+        </div>
+    </div>
+    <div class="form-actions">
+        <button type="submit" value="Delete" class="btn btn-danger icon-delete">
+            <i class="icon-trash icon-white"></i>&nbsp;Delete
+        </button>
+        @*<input type="submit" value="Delete" class="btn btn-danger"/>*@ @*<a href="#" class="btn btn-danger">
+            <i class="icon-trash icon-white"></i>
+             Delete
+        </a>*@
+        @Html.ActionLink("Cancel", "Index", "Item", null, new { @class = "btn" })
+    </div>
+}
