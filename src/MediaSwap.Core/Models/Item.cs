@@ -21,5 +21,7 @@ namespace MediaSwap.Core.Models
         public virtual ItemType ItemType { get; set; }
 
         public virtual ICollection<User> Users { get; set; }
+
+        public virtual ICollection<Queue> Queues { get; set; }
     }
 }
