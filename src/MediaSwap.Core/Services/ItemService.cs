@@ -55,7 +55,12 @@ namespace MediaSwap.Core.Services
         {
             using (var context = GetContext())
             {
-                var item = context.Item.Find(itemId);
+                var item = context.Item.Include("Queues").First(e => e.ItemId == itemId);
+
+                if (item.Queues.Any(e => e.QueueStatusValue == 1))
+                {
+                    throw new ApplicationException("Cannot delete a loaned item");
+                }
 
                 context.Item.Remove(item);
                 context.SaveChanges() ;

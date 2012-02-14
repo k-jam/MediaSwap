@@ -74,17 +74,16 @@ namespace MediaSwap.Web.Controllers
         {
             IItemService _itemService = new ItemService();
 
-            //even though the user doesnot have a delete button for loaned items, 
-            //they may have typed the item id within the url ".../Item/DeleteItem/25"
-            //check if item is loaned just for sanity
-            if (_itemService.GetItem(item.ItemId).Queues.Any(e => e.QueueStatusValue == 1))
+            try
             {
-                ModelState.AddModelError("", "Cannot delete a loaned item");
+                _itemService.DeleteItem(item.ItemId);
+                return RedirectToAction("Index");
+            }
+            catch (ApplicationException ex)
+            {
+                ModelState.AddModelError("", ex.Message);
                 return View(item);
             }
-
-            _itemService.DeleteItem(item.ItemId);
-            return RedirectToAction("Index");
         }
       
         [HttpGet]
