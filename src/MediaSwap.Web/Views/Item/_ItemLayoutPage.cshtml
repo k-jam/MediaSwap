@@ -22,7 +22,7 @@
             <th>
                 Format
             </th>
-            <th></th>
+            @*<th></th>*@
         </tr>
     </thead>
     <tbody>
@@ -34,7 +34,7 @@
                 </td>
                 <td>@item.ItemType.Format.FormatTypeName
                 </td>
-                <td>
+                @*<td>
                     @if (item.Queues.Any(e => e.QueueStatusValue == 1))
                     {
                         <span class="label label-important">Loaned</span>
@@ -42,12 +42,8 @@
                     else
                     { 
                         @Html.ActionLink("Delete", "DeleteItem", new { id = item.ItemId })
-                        @*<a href="/Item/DeleteIem/@item.ItemId" class="btn btn-danger">
-                            <i class="icon-trash icon-white"></i>
-                            Delete
-                        </a>*@
                     }
-                </td>
+                </td>*@
             </tr>
      
         }
